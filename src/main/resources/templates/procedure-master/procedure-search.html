@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Procedure Master</title>
+
+	<script th:inline="javascript">
+		window.contextPath = /*[[@{/}]]*/ '';
+	</script>
+
+	<link rel="icon" href="data:,">
+
+	<!-- Bootstrap -->
+
+	<link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+	<!-- Bootstrap Icons -->
+
+
+
+	<!-- Header -->
+
+	 
+
+	<!-- Page CSS -->
+
+	<link rel="stylesheet" th:href="@{/css/procedure-search.css}">
+
+</head>
+
+<body>
+ 
+
+	<div class="container mt-4">
+
+		<!-- Success -->
+
+		<div id="successPopup" class="alert alert-success" style="display:none;">
+
+		</div>
+
+		<!-- Error -->
+
+		<div id="errorPopup" class="alert alert-danger" style="display:none;">
+
+		</div>
+
+		<div class="card shadow">
+
+			<!-- Header -->
+
+			<div class="card-header form-header">
+
+				<div class="d-flex justify-content-between align-items-center">
+
+					<h4 class="mb-0">
+
+						Procedure Master
+
+					</h4>
+
+					<a th:href="@{/procedure/create}" class="btn btn-light">
+
+						<i class="bi bi-plus-circle"></i>
+
+						Create New
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<!-- Body -->
+
+			<div class="card-body">
+
+				<!-- Search -->
+
+				<div class="row mb-4 align-items-end">
+
+					<!-- Search Text -->
+
+					<div class="col-md-4">
+
+						<label class="form-label">
+
+							Search
+
+						</label>
+
+						<input type="text" id="searchText" class="form-control"
+							placeholder="Procedure / Schema / Package">
+
+					</div>
+
+					<!-- Database -->
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							Database
+
+						</label>
+
+						<select id="databaseFilter" class="form-select">
+
+							<option value="">
+
+								All Databases
+
+							</option>
+
+						</select>
+
+					</div>
+
+					<!-- Status -->
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							Status
+
+						</label>
+
+						<select id="statusFilter" class="form-select">
+
+							<option value="">
+
+								All
+
+							</option>
+
+							<option value="Y">
+
+								Active
+
+							</option>
+
+							<option value="N">
+
+								Non Active
+
+							</option>
+
+						</select>
+
+					</div>
+
+					<!-- Clear -->
+
+					<div class="col-md-2">
+
+						<button id="clearBtn" class="btn btn-secondary w-100">
+
+							<i class="bi bi-arrow-clockwise"></i>
+
+							Clear
+
+						</button>
+
+					</div>
+
+				</div>
+
+				<hr>
+
+				<!-- Table -->
+
+				<div class="table-responsive">
+
+					<table class="table table-bordered table-hover align-middle">
+
+						<thead class="table-primary">
+
+							<tr>
+
+								<th width="8%">
+
+									ID
+
+								</th>
+
+								<th width="20%">
+
+									Procedure Name
+
+								</th>
+
+								<th width="18%">
+
+									Database
+
+								</th>
+
+								<th width="15%">
+
+									Schema
+
+								</th>
+
+								<th width="12%">
+
+									Type
+
+								</th>
+
+								<th width="10%">
+
+									Timeout
+
+								</th>
+
+								<th width="10%">
+
+									Status
+
+								</th>
+
+								<th width="7%">
+
+									Action
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody id="procedureTableBody">
+						</tbody>
+
+					</table>
+
+				</div>
+
+				<!-- Record Count -->
+
+				<div id="recordCount" class="mt-3 text-muted fw-semibold">
+
+					Showing 0 Records
+
+				</div>
+
+				<!-- Pagination -->
+
+				<nav class="mt-3">
+
+					<ul id="pagination" class="pagination justify-content-center">
+
+					</ul>
+
+				</nav>
+
+			</div>
+
+			<!-- Footer -->
+
+			<div class="card-footer text-center">
+
+				Developed &amp; Maintained by C&amp;IT, BSP
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- JQuery -->
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<!-- Bootstrap -->
+
+	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+	<!-- Header -->
+ 
+
+	<!-- Page JS -->
+
+	<script th:src="@{/js/procedure-search.js}"></script>
+
+</body>
+
+</html>

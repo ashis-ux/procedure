@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Procedure Parameters</title>
+
+	<script th:inline="javascript">
+		window.contextPath = /*[[@{/}]]*/ '';
+	</script>
+
+	<link rel="icon" href="data:,">
+
+	<!-- Bootstrap -->
+
+	<link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+	<!-- Bootstrap Icons -->
+
+	<link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
+
+	<!-- Header -->
+
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+
+	<!-- Page CSS -->
+
+	<link rel="stylesheet" th:href="@{/css/procedure-parameter.css}">
+
+</head>
+
+<body>
+
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<div class="container mt-4">
+
+		<!-- Success -->
+
+		<div id="successPopup" class="alert alert-success" style="display:none;">
+
+		</div>
+
+		<!-- Error -->
+
+		<div id="errorPopup" class="alert alert-danger" style="display:none;">
+
+		</div>
+
+		<div class="card shadow">
+
+			<!-- Header -->
+
+			<div class="card-header form-header">
+
+				<div class="d-flex justify-content-between align-items-center">
+
+					<h4 class="mb-0">
+
+						Procedure Parameters
+
+					</h4>
+
+					<a th:href="@{/procedure/search}" class="btn btn-light">
+
+						<i class="bi bi-arrow-left"></i>
+
+						Back
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<!-- Body -->
+
+			<div class="card-body">
+
+				<input type="hidden" id="procedureId" th:value="${procedureId}">
+
+				<!-- ==========================================
+                 Procedure Details
+            =========================================== -->
+
+				<div class="row mb-3">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Procedure UUID
+
+						</label>
+
+						<input type="text" id="procedureUuid" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Procedure Name
+
+						</label>
+
+						<input type="text" id="procedureName" class="form-control" readonly>
+
+					</div>
+
+				</div>
+
+				<div class="row mb-3">
+
+					<div class="col-md-4">
+
+						<label class="form-label">
+
+							Database
+
+						</label>
+
+						<input type="text" id="databaseName" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-4">
+
+						<label class="form-label">
+
+							Schema
+
+						</label>
+
+						<input type="text" id="schemaName" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-4">
+
+						<label class="form-label">
+
+							Package
+
+						</label>
+
+						<input type="text" id="packageName" class="form-control" readonly>
+
+					</div>
+
+				</div>
+
+				<div class="row mb-4">
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							Procedure Type
+
+						</label>
+
+						<input type="text" id="procedureType" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							HTTP Method
+
+						</label>
+
+						<input type="text" id="httpMethod" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							Timeout
+
+						</label>
+
+						<input type="text" id="timeoutSeconds" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							Status
+
+						</label>
+
+						<input type="text" id="status" class="form-control" readonly>
+
+					</div>
+
+				</div>
+
+				<hr>
+
+				<!-- ==========================================
+                 Header
+            =========================================== -->
+
+				<div class="d-flex justify-content-between align-items-center mb-3">
+
+					<h5 class="mb-0">
+
+						Parameter List
+
+					</h5>
+
+					<button id="addParameterBtn" class="btn btn-success">
+
+						<i class="bi bi-plus-circle"></i>
+
+						Add Parameter
+
+					</button>
+
+				</div>
+
+				<!-- ==========================================
+                 Parameter Table
+            =========================================== -->
+
+				<div class="table-responsive">
+
+					<table class="table table-bordered table-hover align-middle">
+
+						<thead class="table-primary">
+
+							<tr>
+
+								<th width="7%">
+
+									Seq
+
+								</th>
+
+								<th width="18%">
+
+									Parameter Name
+
+								</th>
+
+								<th width="15%">
+
+									Data Type
+
+								</th>
+
+								<th width="15%">
+
+									Parameter Mode
+
+								</th>
+
+								<th width="10%">
+
+									Required
+
+								</th>
+
+								<th width="15%">
+
+									Default Value
+
+								</th>
+
+								<th width="10%">
+
+									Status
+
+								</th>
+
+								<th width="10%">
+
+									Action
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody id="parameterTableBody">
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+				<!-- Record Count -->
+
+				<div id="recordCount" class="mt-3 text-muted fw-semibold">
+
+					Showing 0 Records
+
+				</div>
+
+				<!-- Pagination -->
+
+				<nav class="mt-3">
+
+					<ul id="pagination" class="pagination justify-content-center">
+
+					</ul>
+
+				</nav>
+
+			</div>
+
+			<!-- Footer -->
+
+			<div class="card-footer text-center">
+
+				Developed &amp; Maintained by C&amp;IT, BSP
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- JQuery -->
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<!-- Bootstrap -->
+
+	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+	<!-- Header -->
+
+	<script th:src="@{/js/header.js}"></script>
+
+	<!-- Page JavaScript -->
+
+	<script th:src="@{/js/procedure-parameter.js}"></script>
+
+</body>
+
+</html>

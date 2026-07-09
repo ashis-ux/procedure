@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Update Procedure</title>
+
+	<!-- Context Path -->
+
+	<script th:inline="javascript">
+		window.contextPath = /*[[@{/}]]*/ '';
+	</script>
+
+	<link rel="icon" href="data:,">
+
+	<!-- Bootstrap -->
+
+	<link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+	<!-- Bootstrap Icons -->
+
+	<link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
+
+	<!-- Header -->
+
+ 
+
+	<!-- Page CSS -->
+
+	<link rel="stylesheet" th:href="@{/css/procedure-update.css}">
+
+</head>
+
+<body>
+
+	 
+
+	<div class="container mt-4">
+
+		<!-- Success Message -->
+
+		<div id="successPopup" class="alert alert-success" style="display:none;">
+
+		</div>
+
+		<!-- Error Message -->
+
+		<div id="errorPopup" class="alert alert-danger" style="display:none;">
+
+		</div>
+
+		<div class="card shadow">
+
+			<!-- Header -->
+
+			<div class="card-header form-header">
+
+				<div class="d-flex justify-content-between align-items-center">
+
+					<h4 class="mb-0">
+
+						Update Procedure
+
+					</h4>
+
+					<a th:href="@{/procedure/search}" class="btn btn-light">
+
+						Back
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<!-- Body -->
+
+			<div class="card-body">
+
+				<input type="hidden" id="procedureId" th:value="${procedureId}">
+
+				<form id="procedureUpdateForm">
+					<div class="row mb-3">
+
+					    <label class="col-md-3 col-form-label">
+
+					        Procedure UUID
+
+					    </label>
+
+					    <div class="col-md-9">
+
+					        <input
+					            type="text"
+					            id="procedureUuid"
+					            class="form-control"
+					            readonly>
+
+					    </div>
+
+					</div>
+
+					<!-- Database -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Database
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-9">
+
+							<select id="databaseId" class="form-select">
+
+								<option value="">
+
+									Select Database
+
+								</option>
+
+							</select>
+
+						</div>
+
+					</div>
+
+					<!-- Schema Name -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Schema Name
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-9">
+
+							<input type="text" id="schemaName" class="form-control" maxlength="100">
+
+						</div>
+
+					</div>
+
+					<!-- Package -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Package Name
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="packageName" class="form-control" maxlength="100">
+
+						</div>
+
+						<label class="col-md-3 col-form-label">
+
+							Procedure Name
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="procedureName" class="form-control" maxlength="100">
+
+						</div>
+
+					</div>
+
+					<!-- Type -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Procedure Type
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-3">
+
+							<select id="procedureType" class="form-select">
+
+								<option value="">
+
+									Select
+
+								</option>
+
+							</select>
+
+						</div>
+
+						<label class="col-md-3 col-form-label">
+
+							HTTP Method
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="httpMethod" class="form-control" value="POST" readonly>
+
+						</div>
+
+					</div>
+
+					<!-- Timeout -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Timeout (Seconds)
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="number" id="timeoutSeconds" class="form-control">
+
+						</div>
+
+						<label class="col-md-3 col-form-label">
+
+							Active Status
+
+						</label>
+
+						<div class="col-md-3">
+
+							<select id="active" class="form-select">
+
+								<option value="Y">
+
+									Active
+
+								</option>
+
+								<option value="N">
+
+									Non Active
+
+								</option>
+
+							</select>
+
+						</div>
+
+					</div>
+					<!-- Description -->
+
+					<div class="row mb-4">
+
+						<label class="col-md-3 col-form-label">
+
+							Description
+
+						</label>
+
+						<div class="col-md-9">
+
+							<textarea id="description" class="form-control" rows="4" maxlength="500"
+								placeholder="Enter Procedure Description"></textarea>
+
+						</div>
+
+					</div>
+
+					<hr>
+
+					<!-- Buttons -->
+
+					<div class="text-center">
+
+						<button type="button" id="updateBtn" class="btn btn-primary">
+
+							<i class="bi bi-pencil-square"></i>
+
+							Update
+
+						</button>
+
+						<button type="reset" id="resetBtn" class="btn btn-secondary ms-2">
+
+							<i class="bi bi-arrow-clockwise"></i>
+
+							Reset
+
+						</button>
+
+						<a th:href="@{/procedure/search}" class="btn btn-danger ms-2">
+
+							<i class="bi bi-x-circle"></i>
+
+							Cancel
+
+						</a>
+
+					</div>
+
+				</form>
+
+			</div>
+
+			<!-- Footer -->
+
+			<div class="card-footer text-center">
+
+				Developed &amp; Maintained by C&amp;IT, BSP
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- JQuery -->
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<!-- Bootstrap -->
+
+	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+	<!-- Header -->
+
+ 
+	<!-- Page JavaScript -->
+
+	<script th:src="@{/js/procedure-update.js}"></script>
+
+</body>
+
+</html>

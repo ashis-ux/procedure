@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Procedure Gateway - Database Master</title>
+
+    <script th:inline="javascript">
+        window.contextPath = /*[[@{/}]]*/ '';
+    </script>
+
+    <link rel="icon" href="data:,">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
+
+ 
+
+    <!-- Search Page CSS -->
+    <link rel="stylesheet" th:href="@{/css/database-search.css}">
+
+</head>
+
+<body>
+
+ 
+
+<div class="container-fluid mt-4">
+
+    <!-- Success Message -->
+    <div id="successPopup"
+         class="alert alert-success"
+         style="display:none;">
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorPopup"
+         class="alert alert-danger"
+         style="display:none;">
+    </div>
+
+    <div class="card shadow database-card">
+
+        <div class="card-header">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-6">
+                    <h4 class="page-title mb-0">
+                        Database Master
+                    </h4>
+                </div>
+
+                <div class="col-md-6 text-end">
+
+                    <a th:href="@{/database/create}"
+                       class="btn btn-primary">
+
+                        <i class="bi bi-plus-circle"></i>
+
+                        New Database
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- Search Filters -->
+
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Search Database
+
+                    </label>
+
+                    <input
+                            type="text"
+                            id="searchText"
+                            class="form-control"
+                            placeholder="Search by Database ID / Database Name">
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+
+                        Status
+
+                    </label>
+
+                    <select
+                            id="statusFilter"
+                            class="form-select">
+
+                        <option value="">All</option>
+
+                        <option value="Y">
+                            Active
+                        </option>
+
+                        <option value="N">
+                            Non Active
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+
+                    <button
+                            id="clearBtn"
+                            class="btn btn-secondary w-100">
+
+                        <i class="bi bi-arrow-clockwise"></i>
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Table -->
+
+            <div class="table-responsive">
+
+                <table
+                        class="table table-bordered table-hover align-middle">
+
+                    <thead>
+
+                    <tr>
+
+                        <th width="8%">
+                            Database ID
+                        </th>
+
+                        <th width="18%">
+                            Database Name
+                        </th>
+
+                        <th width="10%">
+                            Type
+                        </th>
+
+                        <th width="18%">
+                            Host
+                        </th>
+
+                        <th width="8%">
+                            Port
+                        </th>
+
+                        <th width="15%">
+                            Username
+                        </th>
+
+                        <th width="8%">
+                            Status
+                        </th>
+
+                        <th width="15%">
+                            Action
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="databaseTableBody">
+
+                    <!-- Dynamic Data -->
+
+                    <tr>
+
+                        <td colspan="8"
+                            class="text-center text-muted">
+
+                            No Records Found
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Pagination -->
+
+            <div class="row mt-4">
+
+                <div class="col-md-6">
+
+                    <span id="recordCount">
+
+                        Showing 0 Records
+
+                    </span>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <nav class="float-end">
+
+                        <ul
+                                class="pagination mb-0"
+                                id="pagination">
+
+                        </ul>
+
+                    </nav>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer text-center">
+
+            Developed & Maintained by C&IT, BSP
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JQuery -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap -->
+
+<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+<!-- Header JS -->
+ 
+
+<!-- Search JS -->
+
+<script th:src="@{/js/database-search.js}"></script>
+
+</body>
+
+</html>

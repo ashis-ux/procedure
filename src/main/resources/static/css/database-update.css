@@ -1,0 +1,398 @@
+/* ==========================================================
+   Procedure Gateway
+   Database Master - Update
+========================================================== */
+
+/* ==========================
+   Body
+========================== */
+
+body {
+
+    background-color: #f4f6fa;
+
+    font-family: "Segoe UI",
+                 Tahoma,
+                 Geneva,
+                 Verdana,
+                 sans-serif;
+
+}
+
+
+/* ==========================
+   Container
+========================== */
+
+.container {
+
+    max-width: 1100px;
+
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.database-card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+
+}
+
+
+.card-header {
+
+    background: #1E4588;
+
+    color: #ffffff;
+
+    border-bottom: none;
+
+    padding: 18px 24px;
+
+}
+
+
+.card-header h4 {
+
+    font-weight: 600;
+
+}
+
+
+.card-body {
+
+    background: #ffffff;
+
+    padding: 35px;
+
+}
+
+
+.card-footer {
+
+    background: #f8f9fa;
+
+    color: #6c757d;
+
+    font-size: 13px;
+
+    padding: 12px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.col-form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+}
+
+
+.required {
+
+    color: red;
+
+}
+
+
+/* ==========================
+   Form Controls
+========================== */
+
+.form-control,
+
+.form-select {
+
+    border-radius: 8px;
+
+    height: 45px;
+
+    border: 1px solid #ced4da;
+
+    transition: all .25s ease;
+
+}
+
+
+.form-control:focus,
+
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow: 0 0 0 .20rem rgba(30, 69, 136, .20);
+
+}
+
+
+/* ==========================
+   Read Only Fields
+========================== */
+
+.form-control[readonly] {
+
+    background: #eef2f7;
+
+    color: #495057;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ==========================
+   Disabled Fields
+========================== */
+
+.form-control:disabled,
+
+.form-select:disabled {
+
+    background: #eef2f7;
+
+}
+
+
+/* ==========================
+   Input Group
+========================== */
+
+.input-group .btn {
+
+    border-top-right-radius: 8px;
+
+    border-bottom-right-radius: 8px;
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    min-width: 130px;
+
+    border-radius: 8px;
+
+    font-weight: 500;
+
+}
+
+
+.btn-success {
+
+    background: #198754;
+
+    border-color: #198754;
+
+}
+
+
+.btn-success:hover {
+
+    background: #157347;
+
+    border-color: #157347;
+
+}
+
+
+.btn-secondary {
+
+    background: #6c757d;
+
+    border-color: #6c757d;
+
+}
+
+
+.btn-danger {
+
+    background: #dc3545;
+
+    border-color: #dc3545;
+
+}
+
+
+.btn-light {
+
+    border-radius: 8px;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Horizontal Line
+========================== */
+
+hr {
+
+    margin-top: 25px;
+
+    margin-bottom: 25px;
+
+    border-top: 2px solid #dee2e6;
+
+}
+
+
+/* ==========================
+   Placeholder
+========================== */
+
+::placeholder {
+
+    color: #adb5bd;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================
+   Password Button
+========================== */
+
+#togglePassword {
+
+    min-width: 50px;
+
+}
+
+
+/* ==========================
+   Validation
+========================== */
+
+.is-valid {
+
+    border-color: #198754;
+
+}
+
+
+.is-invalid {
+
+    border-color: #dc3545;
+
+}
+
+
+/* ==========================
+   Animation
+========================== */
+
+.database-card {
+
+    animation: fadeIn .35s ease-in-out;
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 992px) {
+
+    .card-body {
+
+        padding: 25px;
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .btn {
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+    }
+
+    .col-form-label {
+
+        margin-bottom: 6px;
+
+    }
+
+    .card-body {
+
+        padding: 20px;
+
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .container {
+
+        padding: 10px;
+
+    }
+
+    .card-body {
+
+        padding: 18px;
+
+    }
+
+}

@@ -1,0 +1,314 @@
+/* ==========================================================
+   Procedure Gateway
+   Procedure Master - Update
+========================================================== */
+
+/* ==========================
+   General
+========================== */
+
+body {
+
+    background-color: #f4f6fa;
+
+    font-family: "Segoe UI",
+                 Tahoma,
+                 Geneva,
+                 Verdana,
+                 sans-serif;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================
+   Container
+========================== */
+
+.container {
+
+    max-width: 1100px;
+
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+}
+
+
+.card-header {
+
+    border-bottom: none;
+
+}
+
+
+.form-header {
+
+    background-color: #1E4588;
+
+    color: #ffffff;
+
+    padding: 15px 20px;
+
+}
+
+
+.card-footer {
+
+    background-color: #f8f9fa;
+
+    font-size: 13px;
+
+    color: #666666;
+
+    padding: 10px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.col-form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+}
+
+
+.required {
+
+    color: red;
+
+}
+
+
+/* ==========================
+   Form Controls
+========================== */
+
+.form-control,
+
+.form-select {
+
+    border-radius: 8px;
+
+    border: 1px solid #ced4da;
+
+}
+
+
+.form-control:focus,
+
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow:
+        0 0 0 0.2rem rgba(30, 69, 136, 0.20);
+
+}
+
+
+/* ==========================
+   Read Only Fields
+========================== */
+
+.form-control[readonly] {
+
+    background-color: #e9ecef;
+
+    cursor: not-allowed;
+
+    color: #495057;
+
+}
+
+
+/* ==========================
+   Text Area
+========================== */
+
+textarea.form-control {
+
+    resize: vertical;
+
+    min-height: 120px;
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    min-width: 120px;
+
+    border-radius: 8px;
+
+    font-weight: 500;
+
+}
+
+
+.btn-primary {
+
+    background-color: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+.btn-primary:hover {
+
+    background-color: #16376B;
+
+    border-color: #16376B;
+
+}
+
+
+.btn-secondary {
+
+    background-color: #6c757d;
+
+    border-color: #6c757d;
+
+}
+
+
+.btn-secondary:hover {
+
+    background-color: #5c636a;
+
+    border-color: #565e64;
+
+}
+
+
+.btn-danger {
+
+    background-color: #dc3545;
+
+    border-color: #dc3545;
+
+}
+
+
+.btn-danger:hover {
+
+    background-color: #bb2d3b;
+
+    border-color: #b02a37;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ==========================
+   Divider
+========================== */
+
+hr {
+
+    border-top: 2px solid #dee2e6;
+
+    margin-top: 20px;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* ==========================
+   Animation
+========================== */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+.card {
+
+    animation: fadeIn 0.35s ease-in-out;
+
+}
+
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 768px) {
+
+    .btn {
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+    }
+
+    .card-body {
+
+        padding: 20px;
+
+    }
+
+    .col-form-label {
+
+        margin-bottom: 5px;
+
+    }
+
+}

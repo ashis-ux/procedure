@@ -1,0 +1,393 @@
+/* ==========================================================
+   Procedure Gateway
+   Procedure Master - Create
+========================================================== */
+
+/* ==========================
+   General
+========================== */
+
+body {
+
+    background-color: #f4f6fa;
+
+    font-family: "Segoe UI",
+                 Tahoma,
+                 Geneva,
+                 Verdana,
+                 sans-serif;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================
+   Container
+========================== */
+
+.container {
+
+    max-width: 1100px;
+
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.procedure-card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+}
+
+
+.card-header {
+
+    background-color: #1E4588;
+
+    color: #ffffff;
+
+    border-bottom: none;
+
+    padding: 18px 24px;
+
+}
+
+
+.card-header h4 {
+
+    font-weight: 600;
+
+    margin: 0;
+
+}
+
+
+.card-body {
+
+    background-color: #ffffff;
+
+    padding: 35px;
+
+}
+
+
+.card-footer {
+
+    background-color: #f8f9fa;
+
+    color: #6c757d;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    padding: 12px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.col-form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+}
+
+
+.required {
+
+    color: red;
+
+}
+
+
+/* ==========================
+   Form Controls
+========================== */
+
+.form-control,
+
+.form-select {
+
+    border-radius: 8px;
+
+    height: 44px;
+
+    border: 1px solid #ced4da;
+
+    transition: all .25s ease;
+
+}
+
+
+textarea.form-control {
+
+    height: auto;
+
+    resize: vertical;
+
+    min-height: 110px;
+
+}
+
+
+.form-control:focus,
+
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow: 0 0 0 .20rem rgba(30, 69, 136, .20);
+
+}
+
+
+/* ==========================
+   Read Only Fields
+========================== */
+
+.form-control[readonly] {
+
+    background-color: #eef2f7;
+
+    color: #495057;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ==========================
+   Disabled
+========================== */
+
+.form-control:disabled,
+
+.form-select:disabled {
+
+    background-color: #eef2f7;
+
+}
+
+
+/* ==========================
+   Placeholder
+========================== */
+
+::placeholder {
+
+    color: #adb5bd;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    min-width: 130px;
+
+    border-radius: 8px;
+
+    font-weight: 500;
+
+}
+
+
+.btn-primary {
+
+    background-color: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+.btn-primary:hover {
+
+    background-color: #16376B;
+
+    border-color: #16376B;
+
+}
+
+
+.btn-secondary {
+
+    background-color: #6c757d;
+
+    border-color: #6c757d;
+
+}
+
+
+.btn-danger {
+
+    background-color: #dc3545;
+
+    border-color: #dc3545;
+
+}
+
+
+.btn-light {
+
+    min-width: 130px;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ==========================
+   Divider
+========================== */
+
+hr {
+
+    margin-top: 30px;
+
+    margin-bottom: 30px;
+
+    border-top: 2px solid #dee2e6;
+
+}
+
+
+/* ==========================
+   Validation
+========================== */
+
+.is-valid {
+
+    border-color: #198754;
+
+}
+
+
+.is-invalid {
+
+    border-color: #dc3545;
+
+}
+
+
+/* ==========================
+   Animation
+========================== */
+
+.procedure-card {
+
+    animation: fadeIn .35s ease-in-out;
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 992px) {
+
+    .card-body {
+
+        padding: 25px;
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .btn {
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+    }
+
+    .card-body {
+
+        padding: 20px;
+
+    }
+
+    .col-form-label {
+
+        margin-bottom: 6px;
+
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .container {
+
+        padding: 10px;
+
+    }
+
+    .card-body {
+
+        padding: 18px;
+
+    }
+
+}

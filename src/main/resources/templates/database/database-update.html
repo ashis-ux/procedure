@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Update Database</title>
+
+	<script th:inline="javascript">
+		window.contextPath = /*[[@{/}]]*/ '';
+	</script>
+
+	<link rel="icon" href="data:,">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+ 
+	
+
+	<!-- Page CSS -->
+	<link rel="stylesheet" th:href="@{/css/database-update.css}">
+
+</head>
+
+<body>
+
+	 
+	<div class="container mt-4">
+
+		<!-- Success -->
+
+		<div id="successPopup" class="alert alert-success" style="display:none;">
+		</div>
+
+		<!-- Error -->
+
+		<div id="errorPopup" class="alert alert-danger" style="display:none;">
+		</div>
+
+		<div class="card shadow database-card">
+
+			<div class="card-header form-header">
+
+				<div class="d-flex justify-content-between align-items-center">
+
+					<h4 class="mb-0">
+
+						Update Database
+
+					</h4>
+
+					<a th:href="@{/database/search}" class="btn btn-light">
+
+						<i class="bi bi-arrow-left-circle"></i>
+
+						Back
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<div class="card-body">
+
+				<form id="databaseUpdateForm">
+
+					<!-- Hidden Database ID -->
+
+					<input type="hidden" id="databaseId" th:value="${databaseId}">
+
+					<!-- Database ID -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Database ID
+
+						</label>
+
+						<div class="col-md-9">
+
+							<input type="text" id="databaseIdDisplay" class="form-control" readonly>
+
+						</div>
+
+					</div>
+
+					<!-- Database Name -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Database Name
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-9">
+
+							<input type="text" id="databaseName" maxlength="100" class="form-control">
+
+						</div>
+
+					</div>
+
+					<!-- Database Type -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Database Type
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="databaseType" class="form-control" readonly>
+
+						</div>
+
+						<label class="col-md-3 col-form-label">
+
+							Active Status
+
+						</label>
+
+						<div class="col-md-3">
+
+							<select id="active" class="form-select">
+
+								<option value="Y">
+
+									Active
+
+								</option>
+
+								<option value="N">
+
+									Non Active
+
+								</option>
+
+							</select>
+
+						</div>
+
+					</div>
+
+					<!-- Host -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Host
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-9">
+
+							<input type="text" id="host" class="form-control" maxlength="15">
+
+						</div>
+
+					</div>
+
+					<!-- Port -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							Port
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="number" id="port" class="form-control">
+
+						</div>
+
+						<label class="col-md-3 col-form-label">
+
+							Service Name
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="serviceName" class="form-control">
+
+						</div>
+
+					</div>
+					<!-- SID -->
+
+					<div class="row mb-3">
+
+						<label class="col-md-3 col-form-label">
+
+							SID
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="sid" class="form-control">
+
+						</div>
+
+						<label class="col-md-3 col-form-label">
+
+							Username
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-3">
+
+							<input type="text" id="username" class="form-control" maxlength="100">
+
+						</div>
+
+					</div>
+
+					<!-- Password -->
+
+					<!-- Password -->
+
+					<div class="row mb-4">
+
+						<label class="col-md-3 col-form-label">
+
+							Password
+
+							<span class="required">*</span>
+
+						</label>
+
+						<div class="col-md-9">
+
+							<div class="input-group">
+
+								<input type="password" id="password" class="form-control" maxlength="100">
+
+								<button class="btn btn-outline-secondary" type="button" id="togglePassword">
+
+									<i class="bi bi-eye"></i>
+
+								</button>
+
+							</div>
+
+						</div>
+
+					</div>
+					<hr>
+
+					<!-- Buttons -->
+
+					<div class="text-center">
+
+						<button type="button" id="updateBtn" class="btn btn-success">
+
+							<i class="bi bi-pencil-square"></i>
+
+							Update
+
+						</button>
+
+						<button type="reset" id="resetBtn" class="btn btn-secondary ms-2">
+
+							<i class="bi bi-arrow-counterclockwise"></i>
+
+							Reset
+
+						</button>
+
+						<a th:href="@{/database/search}" class="btn btn-danger ms-2">
+
+							<i class="bi bi-x-circle"></i>
+
+							Cancel
+
+						</a>
+
+					</div>
+
+				</form>
+
+			</div>
+
+			<!-- Footer -->
+
+			<div class="card-footer text-center">
+
+				Developed &amp; Maintained by C&amp;IT, BSP
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- JQuery -->
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<!-- Bootstrap -->
+
+	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+	<!-- Header -->
+
+ 
+
+	<!-- Page JS -->
+
+	<script th:src="@{/js/database-update.js}"></script>
+
+</body>
+
+</html>

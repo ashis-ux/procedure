@@ -1,0 +1,454 @@
+/* ==========================================================
+   Procedure Gateway
+   Procedure Master - Search
+========================================================== */
+
+/* ==========================
+   General
+========================== */
+
+body {
+
+    background-color: #f4f6fa;
+
+    font-family: "Segoe UI",
+                 Tahoma,
+                 Geneva,
+                 Verdana,
+                 sans-serif;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================
+   Container
+========================== */
+
+.container {
+
+    max-width: 1300px;
+
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+}
+
+
+.card-header {
+
+    background-color: #1E4588;
+
+    color: #ffffff;
+
+    border-bottom: none;
+
+    padding: 18px 24px;
+
+}
+
+
+.form-header {
+
+    background-color: #1E4588;
+
+}
+
+
+.card-body {
+
+    padding: 30px;
+
+    background-color: #ffffff;
+
+}
+
+
+.card-footer {
+
+    background-color: #f8f9fa;
+
+    color: #6c757d;
+
+    font-size: 13px;
+
+    padding: 12px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+}
+
+
+/* ==========================
+   Search Controls
+========================== */
+
+.form-control,
+
+.form-select {
+
+    border-radius: 8px;
+
+    height: 44px;
+
+}
+
+
+.form-control:focus,
+
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow: 0 0 0 .20rem rgba(30,69,136,.20);
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    border-radius: 8px;
+
+    min-width: 120px;
+
+    font-weight: 500;
+
+}
+
+
+.btn-primary {
+
+    background-color: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+.btn-primary:hover {
+
+    background-color: #16376B;
+
+    border-color: #16376B;
+
+}
+
+
+.btn-secondary {
+
+    background-color: #6c757d;
+
+    border-color: #6c757d;
+
+}
+
+
+.btn-light {
+
+    min-width: 130px;
+
+}
+
+
+/* ==========================
+   Table
+========================== */
+
+.table {
+
+    margin-bottom: 0;
+
+}
+
+
+.table thead {
+
+    background-color: #1E4588;
+
+    color: white;
+
+}
+
+
+.table thead th {
+
+    background-color: #1E4588 !important;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    font-weight: 600;
+
+}
+
+
+.table tbody td {
+
+    vertical-align: middle;
+
+    text-align: center;
+
+}
+
+
+.table-hover tbody tr:hover {
+
+    background-color: #eef4ff;
+
+}
+
+
+/* ==========================
+   Status
+========================== */
+
+.status-active {
+
+    background-color: #198754;
+
+    color: white;
+
+    padding: 4px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+
+.status-inactive {
+
+    background-color: #dc3545;
+
+    color: white;
+
+    padding: 4px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Action Button
+========================== */
+
+.action-btn {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    padding: 0;
+
+}
+
+
+/* ==========================
+   Record Count
+========================== */
+
+#recordCount {
+
+    font-weight: 600;
+
+    color: #495057;
+
+}
+
+
+/* ==========================
+   Pagination
+========================== */
+
+.pagination {
+
+    margin-top: 20px;
+
+}
+
+
+.page-item.active .page-link {
+
+    background-color: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+.page-link {
+
+    color: #1E4588;
+
+}
+
+
+.page-link:hover {
+
+    color: #16376B;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+}
+
+
+/* ==========================
+   Divider
+========================== */
+
+hr {
+
+    border-top: 2px solid #dee2e6;
+
+}
+
+
+/* ==========================
+   Animation
+========================== */
+
+.card {
+
+    animation: fadeIn .35s ease-in-out;
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 992px) {
+
+    .card-body {
+
+        padding: 20px;
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .btn {
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+    }
+
+    .table {
+
+        font-size: 14px;
+
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .container {
+
+        padding: 10px;
+
+    }
+
+}
+.action-btn {
+    width: 20px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    border-radius: 4px;
+}
+
+.action-btn i {
+    font-size: 13px;
+}
+
+table th:last-child,
+table td:last-child {
+    width: 10px;
+    white-space: nowrap;
+}

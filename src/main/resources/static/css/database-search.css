@@ -1,0 +1,452 @@
+/* ==========================================================
+   DATABASE SEARCH PAGE
+   Project : Procedure Gateway
+   Module  : Database Master
+========================================================== */
+
+/* ==========================
+   Page
+========================== */
+
+body {
+    background: #f4f6fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.database-card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+}
+
+
+/* ==========================
+   Header
+========================== */
+
+.card-header {
+
+    background: #1E4588;
+
+    color: white;
+
+    padding: 18px 24px;
+
+    border-bottom: none;
+
+}
+
+.page-title {
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    margin: 0;
+
+}
+
+
+/* ==========================
+   Card Body
+========================== */
+
+.card-body {
+
+    background: white;
+
+    padding: 30px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ==========================
+   Input Controls
+========================== */
+
+.form-control,
+.form-select {
+
+    height: 44px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ced4da;
+
+    transition: .3s;
+
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow: 0 0 0 .20rem rgba(30,69,136,.20);
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    border-radius: 8px;
+
+    min-width: 130px;
+
+    font-weight: 500;
+
+}
+
+
+/* Primary */
+
+.btn-primary {
+
+    background: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+.btn-primary:hover {
+
+    background: #17386f;
+
+    border-color: #17386f;
+
+}
+
+
+/* Secondary */
+
+.btn-secondary {
+
+    background: #6c757d;
+
+    border-color: #6c757d;
+
+}
+
+
+/* ==========================
+   Table
+========================== */
+
+.table {
+
+    margin-bottom: 0;
+
+    border-color: #dee2e6;
+
+}
+
+.table thead {
+
+    background: #1E4588;
+
+    color: white;
+
+}
+
+.table thead th {
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    padding: 14px;
+
+    border-color: #1E4588;
+
+}
+
+.table tbody td {
+
+    vertical-align: middle;
+
+    text-align: center;
+
+    padding: 12px;
+
+}
+
+.table-hover tbody tr:hover {
+
+    background: rgba(30,69,136,.05);
+
+}
+
+
+/* ==========================
+   Status Badge
+========================== */
+
+.status-active {
+
+    background: #198754;
+
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+.status-inactive {
+
+    background: #dc3545;
+
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Action Buttons
+========================== */
+
+.action-btn {
+
+    width: 36px;
+
+    height: 36px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    margin: 0 2px;
+
+}
+
+.action-btn i {
+
+    font-size: 15px;
+
+}
+
+
+/* ==========================
+   Pagination
+========================== */
+
+.pagination {
+
+    margin: 0;
+
+}
+
+.page-link {
+
+    color: #1E4588;
+
+}
+
+.page-item.active .page-link {
+
+    background: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+/* ==========================
+   Record Count
+========================== */
+
+#recordCount {
+
+    font-size: 14px;
+
+    color: #6c757d;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+}
+
+
+/* ==========================
+   Footer
+========================== */
+
+.card-footer {
+
+    background: #f8f9fa;
+
+    color: #6c757d;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    padding: 12px;
+
+}
+
+
+/* ==========================
+   Search Animation
+========================== */
+
+.table-responsive {
+
+    animation: fadeIn .35s ease;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 992px) {
+
+    .page-title {
+
+        font-size: 20px;
+
+    }
+
+    .card-body {
+
+        padding: 20px;
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .card-body {
+
+        padding: 18px;
+
+    }
+
+    .btn {
+
+        width: 100%;
+
+        margin-top: 10px;
+
+    }
+
+    .table {
+
+        font-size: 14px;
+
+    }
+
+    .page-title {
+
+        text-align: center;
+
+        margin-bottom: 15px;
+
+    }
+
+    .card-header .row {
+
+        text-align: center;
+
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .table {
+
+        font-size: 13px;
+
+    }
+
+    .form-control,
+    .form-select {
+
+        height: 42px;
+
+    }
+
+}

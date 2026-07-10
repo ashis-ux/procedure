@@ -55,7 +55,7 @@ public class homeController {
 		 return "procedure-master/procedure-update";
 	}
 	
-	@GetMapping("/{procedureId}/parameters")
+	@GetMapping("/procedure/{procedureId}/parameters")
 	public String viewParameters(
 
 	        @PathVariable
@@ -65,7 +65,21 @@ public class homeController {
 
 	    model.addAttribute("procedureId", procedureId);
 
-	    return "procedure-master/procedure-parameter";
+	    return "procedure-parameter/procedure-parameter";
+
+	}
+	
+	@GetMapping("procedure/{procedureId}/parameter/create")
+	public String createParameters(
+
+	        @PathVariable
+	        Long procedureId,
+
+	        Model model) {
+
+	    model.addAttribute("procedureId", procedureId);
+
+	    return "procedure-parameter/parameter-create";
 
 	}
 

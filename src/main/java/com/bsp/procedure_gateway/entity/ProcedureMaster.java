@@ -54,7 +54,7 @@ public class ProcedureMaster extends AuditEntity {
     @Column(name = "HTTP_METHOD")
     private String httpMethod;
 
-    @Column(name = "TIMEOUT_SECONDS")
+    @Column(name = "TIMEOUT_SECONDS" , nullable = false)
     private Integer timeoutSeconds;
 
     @Enumerated(EnumType.STRING)

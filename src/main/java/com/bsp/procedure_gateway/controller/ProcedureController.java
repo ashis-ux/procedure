@@ -26,27 +26,6 @@ public class ProcedureController {
 
     private final ProcedureService procedureService;
     
-  
-
-//    @PostMapping
-//    public ResponseEntity<ProcedureResponse> executeProcedure(
-//            @RequestBody @Valid ProcedureRequest request) {
-//
-//        LOGGER.info("Received procedure execution request.");
-//
-//        String uuid = tokenUil.decrypt(request.getToken());
-//
-//        validateUuid(uuid);
-//
-//        LOGGER.info("Executing procedure for UUID: {}", uuid);
-//
-//        ProcedureResponse response = procedureService.execute(uuid, request);
-//
-//        LOGGER.info("Procedure executed successfully for UUID: {}", uuid);
-//
-//        return ResponseEntity.ok(response);
-//    }
-    
     @PostMapping("/{procedureName}")
     public ResponseEntity<ProcedureResponse> executeProcedure(
             @PathVariable String procedureName,
@@ -54,10 +33,6 @@ public class ProcedureController {
             HttpServletRequest httpRequest) {
 
         LOGGER.info("Received request for procedure: {}", procedureName);
-
-//        String uuid = tokenUil.decrypt(request.getToken());
-//
-//        validateUuid(uuid);
 
         ProcedureResponse response =
                 procedureService.execute(procedureName, request,httpRequest);

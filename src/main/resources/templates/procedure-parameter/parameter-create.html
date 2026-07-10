@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Create Procedure Parameter</title>
+
+	<script th:inline="javascript">
+		window.contextPath = /*[[@{/}]]*/ '';
+	</script>
+
+	<link rel="icon" href="data:,">
+
+	<!-- Bootstrap -->
+
+	<link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+	<!-- Bootstrap Icons -->
+
+ 
+
+	<!-- Header -->
+
+ 
+
+	<!-- Page CSS -->
+
+	<link rel="stylesheet" th:href="@{/css/parameter-create.css}">
+
+</head>
+
+<body>
+
+ 
+
+	<div class="container mt-4">
+
+		<!-- Success Message -->
+
+		<div id="successPopup" class="alert alert-success" style="display:none;">
+
+		</div>
+
+		<!-- Error Message -->
+
+		<div id="errorPopup" class="alert alert-danger" style="display:none;">
+
+		</div>
+
+		<div class="card shadow">
+
+			<!-- Header -->
+
+			<div class="card-header form-header">
+
+				<div class="d-flex justify-content-between align-items-center">
+
+					<h4 class="mb-0">
+
+						Create Procedure Parameter
+
+					</h4>
+
+					<a id="backBtn" class="btn btn-light">
+
+						<i class="bi bi-arrow-left"></i>
+
+						Back
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<!-- Body -->
+
+			<div class="card-body">
+
+				<input type="hidden" id="procedureId" th:value="${procedureId}">
+
+				<!-- ==========================================
+                 Procedure Information
+            =========================================== -->
+
+				<div class="row mb-3">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Procedure UUID
+
+						</label>
+
+						<input type="text" id="procedureUuid" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Procedure Name
+
+						</label>
+
+						<input type="text" id="procedureName" class="form-control" readonly>
+
+					</div>
+
+				</div>
+
+				<div class="row mb-4">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Database
+
+						</label>
+
+						<input type="text" id="databaseName" class="form-control" readonly>
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Procedure Type
+
+						</label>
+
+						<input type="text" id="procedureType" class="form-control" readonly>
+
+					</div>
+
+				</div>
+
+				<hr>
+
+				<!-- ==========================================
+                 Parameter Details
+            =========================================== -->
+
+				<div class="row mb-3">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Parameter Name
+
+							<span class="required">*</span>
+
+						</label>
+
+						<input type="text" id="parameterName" class="form-control" maxlength="100">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Parameter Order
+
+							<span class="required">*</span>
+
+						</label>
+
+						<input type="number" id="parameterOrder" class="form-control" min="1">
+
+					</div>
+
+				</div>
+
+				<div class="row mb-3">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Data Type
+
+							<span class="required">*</span>
+
+						</label>
+
+						<select id="dataType" class="form-select">
+
+							<option value="">
+
+								Select Data Type
+
+							</option>
+
+						</select>
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Parameter Mode
+
+							<span class="required">*</span>
+
+						</label>
+
+						<select id="parameterMode" class="form-select">
+
+							<option value="">
+
+								Select Mode
+
+							</option>
+
+						</select>
+
+					</div>
+
+				</div>
+				<div class="row mb-3">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Required
+
+							<span class="required">*</span>
+
+						</label>
+
+						<select id="required" class="form-select">
+
+							<option value="">
+
+								Select
+
+							</option>
+
+							<option value="Y">
+
+								Yes
+
+							</option>
+
+							<option value="N">
+
+								No
+
+							</option>
+
+						</select>
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Status
+
+							<span class="required">*</span>
+
+						</label>
+
+						<select id="active" class="form-select">
+
+							<option value="Y">
+
+								Active
+
+							</option>
+
+							<option value="N">
+
+								Inactive
+
+							</option>
+
+						</select>
+
+					</div>
+
+				</div>
+
+				<div class="row mb-4">
+
+					<div class="col-md-12">
+
+						<label class="form-label">
+
+							Default Value
+
+						</label>
+
+						<input type="text" id="defaultValue" class="form-control" maxlength="200">
+
+					</div>
+
+				</div>
+
+				<hr>
+
+				<!-- ==========================================
+			                 Action Buttons
+			            =========================================== -->
+
+				<div class="text-center">
+
+					<button type="button" id="saveBtn" class="btn btn-primary me-2">
+
+						<i class="bi bi-check-circle"></i>
+
+						Save
+
+					</button>
+
+					<button type="button" id="resetBtn" class="btn btn-secondary me-2">
+
+						<i class="bi bi-arrow-clockwise"></i>
+
+						Reset
+
+					</button>
+
+					<a id="cancelBtn" class="btn btn-danger">
+
+						<i class="bi bi-x-circle"></i>
+
+						Cancel
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<!-- Footer -->
+
+			<div class="card-footer text-center">
+
+				Developed &amp; Maintained by C&amp;IT, BSP
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Bootstrap -->
+
+	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+	<!-- Header -->
+
+ 
+
+	<!-- Page JavaScript -->
+
+	<script th:src="@{/js/parameter-create.js}"></script>
+
+</body>
+
+</html>

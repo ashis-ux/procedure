@@ -29,7 +29,7 @@ public class ProcedureMasterResponse {
     private String description;
 
     private ProcedureType procedureType;
-
+   
     private String httpMethod;
 
     private Integer timeoutSeconds;

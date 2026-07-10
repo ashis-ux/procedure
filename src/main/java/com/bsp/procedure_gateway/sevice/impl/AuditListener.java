@@ -31,7 +31,7 @@
 ////        String user =
 ////                SecurityUtil.getLoggedInUser();
 //
-//        entity.setCreatedBy(user);
+//        entity.setCreatedBy("saa");
 //
 //        entity.setCreatedDate(now);
 //

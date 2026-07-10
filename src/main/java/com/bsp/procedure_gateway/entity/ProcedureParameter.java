@@ -2,6 +2,7 @@ package com.bsp.procedure_gateway.entity;
 
  
 import com.bsp.procedure_gateway.enums.ActiveStatus;
+import com.bsp.procedure_gateway.enums.DataType;
 import com.bsp.procedure_gateway.enums.ParameterMode;
 import jakarta.persistence.*;
 
@@ -35,8 +36,9 @@ public class ProcedureParameter extends AuditEntity {
     @Column(name = "PARAMETER_MODE")
     private ParameterMode parameterMode;
 
-    @Column(name = "DATA_TYPE", nullable = false)
-    private String dataType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "DATA_TYPE")
+    private DataType dataType;
 
     @Column(name = "PARAMETER_ORDER")
     private Integer parameterOrder;

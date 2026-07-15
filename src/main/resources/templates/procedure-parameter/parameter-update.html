@@ -7,7 +7,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Create Procedure Parameter</title>
+	<title>Update Procedure Parameter</title>
 
 	<script th:inline="javascript">
 		window.contextPath = /*[[@{/}]]*/ '';
@@ -21,8 +21,7 @@
 
 	<!-- Bootstrap Icons -->
 
-	<!-- Bootstrap Icons -->
-		<link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
 
 	<!-- Header -->
 
@@ -30,7 +29,7 @@
 
 	<!-- Page CSS -->
 
-	<link rel="stylesheet" th:href="@{/css/parameter-create.css}">
+	<link rel="stylesheet" th:href="@{/css/parameter-update.css}">
 
 </head>
 
@@ -40,13 +39,13 @@
 
 	<div class="container mt-4">
 
-		<!-- Success Message -->
+		<!-- Success -->
 
 		<div id="successPopup" class="alert alert-success" style="display:none;">
 
 		</div>
 
-		<!-- Error Message -->
+		<!-- Error -->
 
 		<div id="errorPopup" class="alert alert-danger" style="display:none;">
 
@@ -62,7 +61,7 @@
 
 					<h4 class="mb-0">
 
-						Create Procedure Parameter
+						Update Procedure Parameter
 
 					</h4>
 
@@ -82,7 +81,9 @@
 
 			<div class="card-body">
 
-				<input type="hidden" id="procedureId" th:value="${procedureId}">
+				<input type="hidden" id="parameterId">
+
+				<input type="hidden" id="procedureId">
 
 				<!-- ==========================================
                  Procedure Information
@@ -319,11 +320,11 @@
 
 				<div class="text-center">
 
-					<button type="button" id="saveBtn" class="btn btn-primary me-2">
+					<button type="button" id="updateBtn" class="btn btn-primary me-2">
 
 						<i class="bi bi-check-circle"></i>
 
-						Save
+						Update
 
 					</button>
 
@@ -363,13 +364,9 @@
 
 	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
 
-	<!-- Header -->
-
- 
-
 	<!-- Page JavaScript -->
 
-	<script th:src="@{/js/parameter-create.js}"></script>
+	<script th:src="@{/js/parameter-update.js}"></script>
 
 </body>
 

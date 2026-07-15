@@ -23,11 +23,12 @@
 
 	<!-- Bootstrap Icons -->
 
-	 
+	<!-- Bootstrap Icons -->
+		<link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
 
 	<!-- Header -->
 
- 
+	<link rel="stylesheet" th:href="@{/css/header.css}">
 
 	<!-- Page CSS -->
 
@@ -37,7 +38,7 @@
 
 <body>
 
-	 
+	<div th:replace="~{fragments/header :: header('database')}"></div>
 
 	<div class="container mt-4">
 

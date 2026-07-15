@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
         ErrorResponse response = ErrorResponse.builder()
                 .requestId(UUID.randomUUID().toString())
-                .errorCode(exception.getErrorCode())
+//                .errorCode(exception.getErrorCode())
                 .errorMessage(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
@@ -112,6 +112,26 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse1> handleResourceNotFoundException(
     		ResourceNotFoundException ex,
+            HttpServletRequest request) {
+
+        log.error("Resource Already Exists : {}", ex.getMessage());
+
+        ErrorResponse1 response = ErrorResponse1.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(response);
+    }
+    
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorResponse1> handleValidationException(
+    		ValidationException ex,
             HttpServletRequest request) {
 
         log.error("Resource Already Exists : {}", ex.getMessage());

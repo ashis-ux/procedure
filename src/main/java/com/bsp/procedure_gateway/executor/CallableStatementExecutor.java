@@ -10,10 +10,13 @@ import com.bsp.procedure_gateway.dto.ProcedureRequest;
 import com.bsp.procedure_gateway.dto.ProcedureResponse;
 import com.bsp.procedure_gateway.entity.ProcedureMaster;
 import com.bsp.procedure_gateway.entity.ProcedureParameter;
+import com.bsp.procedure_gateway.enums.ActiveStatus;
 import com.bsp.procedure_gateway.enums.DataType;
 import com.bsp.procedure_gateway.enums.ParameterMode;
 import com.bsp.procedure_gateway.exception.ProcedureExecutionException;
 import com.bsp.procedure_gateway.exception.ValidationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.sql.DataSource;
 
@@ -35,13 +38,16 @@ import java.util.concurrent.TimeoutException;
 public class CallableStatementExecutor implements ProcedureExecutor {
 
     private final OracleTypeMapper oracleTypeMapper;
+    
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public ProcedureResponse execute(
             ProcedureMaster procedure,
             ProcedureRequest request,
             DataSource dataSource) {
-
+        List<ProcedureParameter> activeparameter=getActiveParameters(procedure.getParameters());
+ 
         String sql = buildCallSql(procedure);
 
         Connection connection = null;
@@ -63,13 +69,13 @@ public class CallableStatementExecutor implements ProcedureExecutor {
 
                 registerParameters(
                         callableStatement,
-                        procedure.getParameters()
+                        activeparameter
                 );
 
 
                 setInputParameters(
                         callableStatement,
-                        procedure.getParameters(),
+                        activeparameter,
                         request
                 );
 
@@ -334,6 +340,8 @@ public class CallableStatementExecutor implements ProcedureExecutor {
 
 
         for (ProcedureParameter p : params) {
+        	
+        	log.info(p.getParameterName());
 
 
             switch (p.getParameterMode()) {
@@ -391,10 +399,13 @@ public class CallableStatementExecutor implements ProcedureExecutor {
         Map<String, Object> input = request != null
                 ? request.getParameters()
                 : Collections.emptyMap();
+        
+       
 
         int index = 1;
 
         for (ProcedureParameter p : params) {
+         
 
             if (p.getParameterMode() == ParameterMode.IN
                     || p.getParameterMode() == ParameterMode.INOUT) {
@@ -616,12 +627,45 @@ public class CallableStatementExecutor implements ProcedureExecutor {
             CallableStatement cs,
             ProcedureMaster procedure) throws SQLException {
 
-    	Map<String, Object> response = new LinkedHashMap<>();
+        Map<String, Object> outParams =
+                readOutParameters(
+                        cs,
+                        procedure.getParameters());
 
-        Map<String, Object> outParams = readOutParameters(cs, procedure.getParameters());
+        List<ProcedureParameter> outParameters =
+                procedure.getParameters()
+                        .stream()
+                        .filter(p -> p.getParameterMode() == ParameterMode.OUT
+                                || p.getParameterMode() == ParameterMode.INOUT)
+                        .toList();
+
+        boolean hasCursor =
+                procedure.getParameters()
+                        .stream()
+                        .anyMatch(p -> p.getParameterMode() == ParameterMode.REF_CURSOR);
+
+        /*
+         * If only one OUT parameter exists,
+         * no REF CURSOR,
+         * return the value directly.
+         */
+        if (!hasCursor
+                && outParameters.size() == 1) {
+
+            return outParams.get(
+                    outParameters.get(0).getParameterName());
+
+        }
+
+        Map<String, Object> response =
+                new LinkedHashMap<>();
 
         if (!outParams.isEmpty()) {
-            response.put("outParameters", outParams);
+
+            response.put(
+                    "outParameters",
+                    outParams);
+
         }
 
         int index = 1;
@@ -630,19 +674,23 @@ public class CallableStatementExecutor implements ProcedureExecutor {
 
             if (p.getParameterMode() == ParameterMode.REF_CURSOR) {
 
-                try (ResultSet rs = (ResultSet) cs.getObject(index)) {
+                try (ResultSet rs =
+                             (ResultSet) cs.getObject(index)) {
 
                     response.put(
                             p.getParameterName(),
-                            readCursor(rs)
-                    );
+                            readCursor(rs));
+
                 }
+
             }
 
             index++;
         }
 
-        return response.isEmpty() ? null : response;
+        return response.isEmpty()
+                ? null
+                : response;
     }
 
     // =========================
@@ -678,7 +726,7 @@ public class CallableStatementExecutor implements ProcedureExecutor {
             CallableStatement cs,
             List<ProcedureParameter> params) throws SQLException {
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new LinkedHashMap<>();
 
         int index = 1;
 
@@ -687,7 +735,52 @@ public class CallableStatementExecutor implements ProcedureExecutor {
             if (p.getParameterMode() == ParameterMode.OUT
                     || p.getParameterMode() == ParameterMode.INOUT) {
 
-                map.put(p.getParameterName(), cs.getObject(index));
+                Object value = cs.getObject(index);
+
+                /*
+                 * Convert Oracle CLOB
+                 */
+                if (value instanceof Clob clob) {
+
+                    try {
+
+                        String clobText = clob.getSubString(
+                                1,
+                                (int) clob.length());
+
+                        /*
+                         * If CLOB contains JSON,
+                         * convert it into Object.
+                         */
+                        try {
+
+                            value = objectMapper.readValue(
+                                    clobText,
+                                    Object.class);
+
+                        } catch (JsonProcessingException ex) {
+
+                            /*
+                             * Not JSON.
+                             * Return plain text.
+                             */
+                            value = clobText;
+
+                        }
+
+                    } catch (SQLException ex) {
+
+                        throw new ProcedureExecutionException(
+                                "Unable to read CLOB output.");
+
+                    }
+
+                }
+
+                map.put(
+                        p.getParameterName(),
+                        value);
+
             }
 
             index++;
@@ -806,5 +899,15 @@ public class CallableStatementExecutor implements ProcedureExecutor {
 
         }
 
+    }
+    
+    private List<ProcedureParameter> getActiveParameters(List<ProcedureParameter> parameters) {
+    	parameters.forEach(p ->
+        log.info("Param: {}, Active: {}",
+            p.getParameterName(),
+            p.getActive()));
+        return parameters.stream()
+                .filter(p -> p.getActive() == ActiveStatus.Y)
+                .toList();
     }
 }

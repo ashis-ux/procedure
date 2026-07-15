@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Procedure Gateway - Client Master</title>
+
+	<script th:inline="javascript">
+		window.contextPath = /*[[@{/}]]*/ '';
+	</script>
+
+	<link rel="icon" href="data:,">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+
+	<!-- Bootstrap Icons -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	
+
+	<!-- CSS -->
+	<link rel="stylesheet" th:href="@{/css/client-master.css}">
+
+</head>
+
+<body>
+	
+	<div th:replace="~{fragments/header :: header('database')}"></div>
+
+	<div class="container-fluid mt-4">
+
+		<!-- Success Message -->
+
+		<div id="successPopup" class="alert alert-success" style="display:none;">
+		</div>
+
+		<!-- Error Message -->
+
+		<div id="errorPopup" class="alert alert-danger" style="display:none;">
+		</div>
+
+		<div class="card shadow database-card">
+
+			<!-- ========================================================= -->
+			<!-- Header -->
+			<!-- ========================================================= -->
+
+			<div class="card-header">
+
+				<div class="row align-items-center">
+
+					<div class="col-md-6">
+
+						<h4 class="page-title mb-0">
+
+							Client Master
+
+						</h4>
+
+					</div>
+
+					<div class="col-md-6 text-end">
+
+						<button id="btnCreateClient" class="btn btn-light">
+
+							<i class="bi bi-plus-circle"></i>
+
+							Create Client
+
+						</button>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- ========================================================= -->
+			<!-- Card Body -->
+			<!-- ========================================================= -->
+
+			<div class="card-body">
+
+				<!-- ================= Search ================= -->
+
+				<div class="row mb-4">
+
+					<div class="col-md-6">
+
+						<label class="form-label">
+
+							Client Name
+
+						</label>
+
+						<input type="text" id="searchClientName" class="form-control" maxlength="100"
+							placeholder="Search by Client Name">
+
+					</div>
+
+					<div class="col-md-3">
+
+						<label class="form-label">
+
+							Status
+
+						</label>
+
+						<select id="statusFilter" class="form-select">
+
+							<option value="">
+								All
+							</option>
+
+							<option value="Y">
+								Active
+							</option>
+
+							<option value="N">
+								Inactive
+							</option>
+
+						</select>
+
+					</div>
+
+					<div class="col-md-3 d-flex align-items-end">
+
+						<button id="clearBtn" class="btn btn-secondary w-100">
+
+							<i class="bi bi-arrow-clockwise"></i>
+
+							Clear
+
+						</button>
+
+					</div>
+
+				</div>
+
+				<!-- ================= Client Table ================= -->
+
+				<div class="table-responsive">
+
+					<table class="table table-bordered table-hover align-middle">
+
+						<thead>
+
+							<tr>
+
+								<th width="7%">
+									Client Id
+								</th>
+
+								<th width="18%">
+									Client UUID
+								</th>
+
+								<th width="15%">
+									Client Name
+								</th>
+
+								<th width="20%">
+									Description
+								</th>
+
+								<th width="8%">
+									Status
+								</th>
+
+								<th width="17%">
+									Updated Date
+								</th>
+
+								<th width="15%">
+									Action
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody id="clientTableBody">
+
+							<tr>
+
+								<td colspan="7" class="text-center text-muted">
+
+									No Records Found
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+				<!-- ================= Pagination ================= -->
+
+				<div class="row mt-4">
+
+					<div class="col-md-6">
+
+						<span id="recordCount">
+
+							Showing 0 Records
+
+						</span>
+
+					</div>
+
+					<div class="col-md-6">
+
+						<nav class="float-end">
+
+							<ul class="pagination mb-0" id="pagination">
+
+							</ul>
+
+						</nav>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<!-- ========================================================= -->
+		<!-- Footer -->
+		<!-- ========================================================= -->
+
+		<div class="card-footer text-center">
+
+			Developed & Maintained by C&IT, BSP
+
+		</div>
+
+	</div>
+
+	</div>
+
+	<!-- ========================================================= -->
+	<!-- Create / Edit Client Modal -->
+	<!-- ========================================================= -->
+
+	<div class="modal fade" id="clientModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+
+		<div class="modal-dialog modal-lg">
+
+			<div class="modal-content">
+
+				<div class="modal-header">
+
+					<h5 id="clientModalTitle" class="modal-title">
+
+						Create Client
+
+					</h5>
+
+					<button type="button" class="btn-close" data-bs-dismiss="modal">
+
+					</button>
+
+				</div>
+
+				<div class="modal-body">
+
+					<form id="clientForm">
+
+						<input type="hidden" id="clientId">
+
+						<!-- Client Id -->
+
+						<div class="row mb-3" id="clientIdDiv" style="display:none;">
+
+							<div class="col-md-6">
+
+								<label class="form-label">
+
+									Client ID
+
+								</label>
+
+								<input type="text" id="displayClientId" class="form-control" readonly>
+
+							</div>
+
+						</div>
+
+						<!-- UUID -->
+
+						<div class="row mb-3" id="uuidSection" style="display:none;">
+
+							<div class="col-md-9">
+
+								<label class="form-label">
+
+									Client UUID
+
+								</label>
+
+								<input type="text" id="clientUuid" class="form-control" readonly>
+
+							</div>
+
+							<div class="col-md-3 d-flex align-items-end">
+
+								<button type="button" id="btnRegenerateUuid" class="btn btn-warning w-100">
+
+									<i class="bi bi-arrow-repeat"></i>
+
+									Regenerate
+
+								</button>
+
+							</div>
+
+						</div>
+
+						<!-- Client Name -->
+
+						<div class="mb-3">
+
+							<label class="form-label">
+
+								Client Name
+								<span class="text-danger">*</span>
+
+							</label>
+
+							<input type="text" id="clientName" class="form-control" maxlength="100" autocomplete="off">
+
+						</div>
+
+						<!-- Description -->
+
+						<div class="mb-3">
+
+							<label class="form-label">
+
+								Description
+
+							</label>
+
+							<input type="text" id="clientDescription" class="form-control" maxlength="255"
+								autocomplete="off">
+
+							<small class="text-muted">
+
+								Spaces are not allowed.
+
+							</small>
+
+						</div>
+
+						<!-- Status -->
+
+						<div class="mb-3">
+
+							<label class="form-label">
+
+								Status
+								<span class="text-danger">*</span>
+
+							</label>
+
+							<select id="clientStatus" class="form-select">
+
+								<option value="Y">
+
+									Active
+
+								</option>
+
+								<option value="N">
+
+									Inactive
+
+								</option>
+
+							</select>
+
+						</div>
+
+					</form>
+
+				</div>
+
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+
+						Cancel
+
+					</button>
+
+					<button type="button" id="btnSaveClient" class="btn btn-primary">
+
+						<i class="bi bi-check-circle"></i>
+
+						Save
+
+					</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- ========================================================= -->
+	<!-- Assign Procedure Modal -->
+	<!-- ========================================================= -->
+
+	<div class="modal fade" id="procedureModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+
+		<div class="modal-dialog modal-xl">
+
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+
+				<div class="modal-header">
+
+					<h5 class="modal-title">
+
+						Assign Procedures
+
+					</h5>
+
+					<button type="button" class="btn-close" data-bs-dismiss="modal">
+
+					</button>
+
+				</div>
+
+				<!-- Modal Body -->
+
+				<div class="modal-body">
+					
+					<div id="procedureSuccessPopup"
+					     class="alert alert-success"
+					     style="display:none;">
+					</div>
+
+					<div id="procedureErrorPopup"
+					     class="alert alert-danger"
+					     style="display:none;">
+					</div>
+
+					<input type="hidden" id="mappingClientId">
+
+					<div class="row mb-4">
+
+						<div class="col-md-6">
+
+							<label class="form-label">
+
+								Client Name
+
+							</label>
+
+							<input type="text" id="mappingClientName" class="form-control" readonly>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label class="form-label">
+
+								Search Procedure
+
+							</label>
+
+							<input type="text" id="searchProcedure" class="form-control"
+								placeholder="Search by Schema / Package / Procedure">
+
+						</div>
+
+					</div>
+
+					<!-- Procedure Table -->
+
+					<div class="table-responsive">
+
+						<table class="table table-bordered table-hover align-middle">
+
+							<thead>
+
+								<tr>
+
+									<th width="8%">
+
+										Select
+
+									</th>
+
+									<th width="20%">
+
+										Schema
+
+									</th>
+
+									<th width="25%">
+
+										Package
+
+									</th>
+
+									<th width="35%">
+
+										Procedure
+
+									</th>
+
+									<th width="12%">
+
+										Status
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody id="procedureMappingTableBody">
+
+								<tr>
+
+									<td colspan="5" class="text-center text-muted">
+
+										No Procedures Found
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+					<!-- Pagination -->
+
+					<div class="row mt-4">
+
+						<div class="col-md-6">
+
+						    <div class="d-flex justify-content-between">
+
+						        <span id="procedureRecordCount">
+
+						            Showing 0 Procedures
+
+						        </span>
+
+						        <span id="selectedCount">
+
+						            Selected : 0
+
+						        </span>
+
+						    </div>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<nav class="float-end">
+
+								<ul class="pagination mb-0" id="procedurePagination">
+
+								</ul>
+
+							</nav>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<!-- Footer -->
+
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+
+						Cancel
+
+					</button>
+
+					<button type="button" id="btnSaveMapping" class="btn btn-primary">
+
+						<i class="bi bi-check-circle"></i>
+
+						Save Mapping
+
+					</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- ========================================================= -->
+	<!-- JQuery -->
+	<!-- ========================================================= -->
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<!-- ========================================================= -->
+	<!-- Bootstrap -->
+	<!-- ========================================================= -->
+
+	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
+
+	<!-- ========================================================= -->
+	<!-- Client Master JS -->
+	<!-- ========================================================= -->
+
+	<script th:src="@{/js/client-master.js}"></script>
+
+</body>
+
+</html>

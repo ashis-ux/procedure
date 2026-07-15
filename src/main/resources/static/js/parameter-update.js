@@ -1,5 +1,7 @@
 const BASE_URL = (window.contextPath || "").replace(/\/$/, "");
 
+let parameterId = null;
+
 let procedureId = null;
 
 
@@ -9,15 +11,17 @@ let procedureId = null;
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    procedureId = getProcedureIdFromUrl();
+    parameterId = getParameterIdFromUrl();
 
     initializeEvents();
+	
+	initializeInputRestrictions();
 
     loadDataTypes();
 
     loadParameterModes();
 
-    loadProcedure();
+    loadParameter();
 
 });
 
@@ -29,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function initializeEvents() {
 
     document
-        .getElementById("saveBtn")
-        .addEventListener("click", saveParameter);
+        .getElementById("updateBtn")
+        .addEventListener("click", updateParameter);
 
     document
         .getElementById("resetBtn")
@@ -48,15 +52,84 @@ function initializeEvents() {
 
 
 /*=========================================================
-    GET PROCEDURE ID
+    GET PARAMETER ID
 =========================================================*/
 
-function getProcedureIdFromUrl() {
+function getParameterIdFromUrl() {
 
     const urlParts =
         window.location.pathname.split("/");
 
-    return urlParts[urlParts.length - 3];
+    return urlParts[urlParts.length - 1];
+
+}
+
+
+/*=========================================================
+    LOAD PARAMETER
+=========================================================*/
+
+function loadParameter() {
+
+    clearMessages();
+
+    fetch(
+
+        BASE_URL +
+
+        "/api/procedure/parameter/" +
+
+        parameterId
+
+    )
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                return response.json()
+
+                    .then(error => {
+
+                        throw error;
+
+                    });
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+            populateParameter(data);
+
+            procedureId = data.procedureId;
+
+            document
+                .getElementById("procedureId")
+                .value = procedureId;
+
+            document
+                .getElementById("parameterId")
+                .value = data.parameterId;
+
+            loadProcedure();
+
+        })
+
+        .catch(error => {
+
+            showError(
+
+                error.message ||
+
+                "Unable to load Parameter."
+
+            );
+
+        });
 
 }
 
@@ -66,8 +139,6 @@ function getProcedureIdFromUrl() {
 =========================================================*/
 
 function loadProcedure() {
-
-    clearMessages();
 
     fetch(
 
@@ -166,8 +237,9 @@ function loadParameterModes() {
          <option value="IN">IN</option>
 
          <option value="OUT">OUT</option>
-		 
-        <option value="REF_CURSOR">REF_CURSOR</option>`;
+
+         <option value="INOUT">INOUT</option>
+		  <option value="REF_CURSOR">REF_CURSOR</option>`;
 
 }
 
@@ -193,10 +265,40 @@ function populateProcedure(procedure) {
 
 
 /*=========================================================
-    SAVE PARAMETER
+    POPULATE PARAMETER
 =========================================================*/
 
-function saveParameter() {
+function populateParameter(parameter) {
+
+    document.getElementById("parameterName").value =
+        parameter.parameterName || "";
+
+    document.getElementById("parameterOrder").value =
+        parameter.parameterOrder || "";
+
+    document.getElementById("dataType").value =
+        parameter.dataType || "";
+
+    document.getElementById("parameterMode").value =
+        parameter.parameterMode || "";
+
+    document.getElementById("required").value =
+        parameter.required || "";
+
+    document.getElementById("defaultValue").value =
+        parameter.defaultValue || "";
+
+    document.getElementById("active").value =
+        parameter.active || "Y";
+
+}
+
+
+/*=========================================================
+    UPDATE PARAMETER
+=========================================================*/
+
+function updateParameter() {
 
     clearMessages();
 
@@ -206,7 +308,7 @@ function saveParameter() {
 
     }
 
-    disableSaveButton();
+    disableUpdateButton();
 
     const request = {
 
@@ -247,15 +349,13 @@ function saveParameter() {
 
         BASE_URL +
 
-        "/api/procedure/" +
+        "/api/procedure/parameter/" +
 
-        procedureId +
-
-        "/parameters",
+        parameterId,
 
         {
 
-            method: "POST",
+            method: "PUT",
 
             headers: {
 
@@ -270,7 +370,7 @@ function saveParameter() {
 
         .then(response => {
 
-            enableSaveButton();
+            enableUpdateButton();
 
             if (!response.ok) {
 
@@ -288,11 +388,11 @@ function saveParameter() {
 
         })
 
-        .then(data => {
+        .then(() => {
 
             showSuccess(
 
-                "Parameter created successfully."
+                "Parameter updated successfully."
 
             );
 
@@ -314,13 +414,13 @@ function saveParameter() {
 
         .catch(error => {
 
-            enableSaveButton();
+            enableUpdateButton();
 
             showError(
 
                 error.message ||
 
-                "Unable to create Parameter."
+                "Unable to update Parameter."
 
             );
 
@@ -336,8 +436,7 @@ function saveParameter() {
 function validateForm() {
 
     if (document.getElementById("parameterName")
-        .value
-        .trim() === "") {
+        .value.trim() === "") {
 
         showError("Parameter Name is mandatory.");
 
@@ -355,12 +454,9 @@ function validateForm() {
     }
 
     if (parseInt(
-
-        document.getElementById("parameterOrder")
-            .value) <= 0) {
+        document.getElementById("parameterOrder").value) <= 0) {
 
         showError(
-
             "Parameter Order should be greater than zero.");
 
         return false;
@@ -413,19 +509,7 @@ function validateForm() {
 
 function resetForm() {
 
-    document.getElementById("parameterName").value = "";
-
-    document.getElementById("parameterOrder").value = "";
-
-    document.getElementById("dataType").selectedIndex = 0;
-
-    document.getElementById("parameterMode").selectedIndex = 0;
-
-    document.getElementById("required").selectedIndex = 0;
-
-    document.getElementById("defaultValue").value = "";
-
-    document.getElementById("active").value = "Y";
+    loadParameter();
 
     clearMessages();
 
@@ -455,7 +539,7 @@ function goBack() {
     INPUT RESTRICTIONS
 =========================================================*/
 
-document.addEventListener("DOMContentLoaded", function () {
+function initializeInputRestrictions() {
 
     /*
      * Parameter Name
@@ -465,7 +549,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("input", function () {
 
             this.value = this.value
+
                 .toUpperCase()
+
                 .replace(/[^A-Z0-9_]/g, "");
 
         });
@@ -478,6 +564,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("input", function () {
 
             this.value = this.value
+
                 .replace(/\D/g, "");
 
         });
@@ -497,7 +584,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-});
+}
 
 
 /*=========================================================
@@ -507,8 +594,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function getValue(id) {
 
     return document
+
         .getElementById(id)
+
         .value
+
         .trim();
 
 }
@@ -517,7 +607,9 @@ function getValue(id) {
 function setValue(id, value) {
 
     document
+
         .getElementById(id)
+
         .value = value;
 
 }
@@ -530,6 +622,7 @@ function isEmpty(value) {
            value.trim() === "";
 
 }
+
 /*=========================================================
     ALERTS
 =========================================================*/
@@ -591,20 +684,31 @@ function showError(message) {
     BUTTON STATE
 =========================================================*/
 
-function disableSaveButton() {
+function disableUpdateButton() {
 
     document
-        .getElementById("saveBtn")
+        .getElementById("updateBtn")
         .disabled = true;
 
 }
 
 
-function enableSaveButton() {
+function enableUpdateButton() {
 
     document
-        .getElementById("saveBtn")
+        .getElementById("updateBtn")
         .disabled = false;
+
+}
+
+
+/*=========================================================
+    PAGE REFRESH
+=========================================================*/
+
+function refreshPage() {
+
+    loadParameter();
 
 }
 
@@ -636,19 +740,6 @@ function formatStatus(value) {
 
 
 /*=========================================================
-    PAGE REFRESH
-=========================================================*/
-
-function refreshPage() {
-
-    loadProcedure();
-
-    resetForm();
-
-}
-
-
-/*=========================================================
     DEBUG
 =========================================================*/
 
@@ -656,7 +747,7 @@ function logRequest(request) {
 
     console.log(
 
-        "Parameter Create Request :",
+        "Parameter Update Request :",
 
         request
 

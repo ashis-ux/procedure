@@ -3,6 +3,7 @@ package com.bsp.procedure_gateway.sevice.impl;
 
 import java.time.LocalDateTime;
 import java.util.Enumeration;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.sql.DataSource;
@@ -15,12 +16,15 @@ import com.bsp.procedure_gateway.datasource.DataSourceManager;
 import com.bsp.procedure_gateway.dto.ProcedureRequest;
 import com.bsp.procedure_gateway.dto.ProcedureResponse;
 import com.bsp.procedure_gateway.entity.ApiRequestLog;
+import com.bsp.procedure_gateway.entity.ClientProcedureMapping;
 import com.bsp.procedure_gateway.entity.DatabaseMaster;
 import com.bsp.procedure_gateway.entity.ProcedureMaster;
 import com.bsp.procedure_gateway.enums.ActiveStatus;
 import com.bsp.procedure_gateway.enums.ExecutionStatus;
 import com.bsp.procedure_gateway.exception.ResourceNotFoundException;
 import com.bsp.procedure_gateway.executor.ProcedureExecutor;
+import com.bsp.procedure_gateway.repo.ClientProcedureMappingRepository;
+import com.bsp.procedure_gateway.repo.ClientRepository;
 import com.bsp.procedure_gateway.repo.ProcedureMasterRepository;
 import com.bsp.procedure_gateway.service.ProcedureMetadataService;
 import com.bsp.procedure_gateway.service.ProcedureService;
@@ -47,6 +51,10 @@ public class ProcedureServiceImpl implements ProcedureService {
     private final RequestLogService requestLogService;
     
     private final ProcedureMasterRepository repository;
+    
+    private final ClientRepository clientRepository;
+    
+    private final ClientProcedureMappingRepository clientProcedureMappingRepository;
 
     private final ObjectMapper objectMapper;
     
@@ -66,9 +74,14 @@ public class ProcedureServiceImpl implements ProcedureService {
                 request);
         
         repository
-        .findByProcedureNameAndActive(procdurename, ActiveStatus.Y)
+        .findByProcedureUuidAndActive(request.getToken(), ActiveStatus.Y)
         .orElseThrow(() -> new ResourceNotFoundException(
                 "Procedure '" + procdurename + "' does not exist or is inactive."));
+        
+        clientRepository
+        .findByClientUuidAndActive(request.getClientToken(), ActiveStatus.Y)
+        .orElseThrow(() -> new ResourceNotFoundException(
+                "Client :" + request.getClientToken() + "' does not exist or is inactive."));
 
         try {
 
@@ -79,7 +92,12 @@ public class ProcedureServiceImpl implements ProcedureService {
             
             if(procedure.getDatabaseMaster().getActive()==ActiveStatus.N)throw new ResourceNotFoundException(
                     "database '" + procedure.getDatabaseMaster().getDatabaseName() + "' does not exist or is inactive.");
-
+            
+            Optional<ClientProcedureMapping> clientprocedureMap=clientProcedureMappingRepository
+            		           .findActiveStatusByClientUuidAndProcedureUuid(request.getClientToken(), request.getToken());
+            if(clientprocedureMap.isEmpty()||clientprocedureMap.get().getActive()==ActiveStatus.N)throw new ResourceNotFoundException(
+                    "Procedure with respect to this client does not exist or is inactive.");
+            
             LOGGER.info("Procedure Found : {}",
                     procedure.getProcedureName());
 
@@ -137,7 +155,7 @@ public class ProcedureServiceImpl implements ProcedureService {
             requestLog.setExecutionTimeMs(end - start);    
 
             LOGGER.info("Procedure Executed Successfully");
-          
+            requestLogService.save(requestLog);
             return response;
 
         }

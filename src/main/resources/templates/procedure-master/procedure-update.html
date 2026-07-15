@@ -27,7 +27,7 @@
 
 	<!-- Header -->
 
- 
+	<link rel="stylesheet" th:href="@{/css/header.css}">
 
 	<!-- Page CSS -->
 
@@ -37,7 +37,7 @@
 
 <body>
 
-	 
+	<div th:replace="~{fragments/header :: header('database')}"></div>
 
 	<div class="container mt-4">
 
@@ -344,7 +344,7 @@
 
 	<script th:src="@{/bootstrap/bootstrap.bundle.min.js}"></script>
 
-	<!-- Header -->
+	 
 
  
 	<!-- Page JavaScript -->

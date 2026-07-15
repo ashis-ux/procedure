@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/procedures")
+@RequestMapping("/bsp_api/api/v1/procedures")
 @RequiredArgsConstructor
 public class ProcedureController {
 
@@ -41,25 +41,7 @@ public class ProcedureController {
     }
     
 
-    /**
-     * Validate UUID Format
-     */
-    private void validateUuid(String uuid) {
-
-        try {
-            UUID.fromString(uuid);
-        }
-        catch (IllegalArgumentException exception) {
-
-            LOGGER.error(
-                    "Invalid UUID : {}",
-                    uuid);
-
-            throw new IllegalArgumentException(
-                    "Invalid UUID Format");
-
-        }
-
-    }
+     
+    
 
 }

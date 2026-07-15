@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="header(activeMenu)">
+
+    <nav class="navbar navbar-expand-lg navbar-dark app-navbar shadow">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand fw-bold"
+               th:href="@{/procedure/search}">
+                Procedure Gateway
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse"
+                 id="navbarMenu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                          
+                           th:href="@{/database/search}">
+
+                            <i class="bi bi-hdd-network"></i>
+
+                            Database Master
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                            
+                           th:href="@{/procedure/search}">
+
+                            <i class="bi bi-diagram-3"></i>
+
+                            Procedure Master
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           
+                           th:href="@{/client/client-master}">
+
+                            <i class="bi bi-people"></i>
+
+                            Client Master
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</div>
+
+</body>
+</html>

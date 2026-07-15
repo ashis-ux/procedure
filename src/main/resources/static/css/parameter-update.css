@@ -1,0 +1,302 @@
+/* ==========================================================
+   Procedure Gateway
+   Create Procedure Parameter
+========================================================== */
+
+/* ==========================
+   General
+========================== */
+
+body {
+
+    background-color: #f4f6fa;
+
+    font-family: "Segoe UI",
+                 Tahoma,
+                 Geneva,
+                 Verdana,
+                 sans-serif;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================
+   Container
+========================== */
+
+.container {
+
+    max-width: 1100px;
+
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    animation: fadeIn .35s ease-in-out;
+
+}
+
+
+.card-header {
+
+    background-color: #1E4588;
+
+    color: #ffffff;
+
+    border-bottom: none;
+
+    padding: 18px 24px;
+
+}
+
+
+.form-header {
+
+    background-color: #1E4588;
+
+}
+
+
+.card-body {
+
+    background: #ffffff;
+
+    padding: 30px;
+
+}
+
+
+.card-footer {
+
+    background-color: #f8f9fa;
+
+    color: #6c757d;
+
+    font-size: 13px;
+
+    padding: 12px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+}
+
+
+.required {
+
+    color: red;
+
+}
+
+
+/* ==========================
+   Controls
+========================== */
+
+.form-control,
+
+.form-select {
+
+    border-radius: 8px;
+
+    border: 1px solid #ced4da;
+
+    height: 42px;
+
+}
+
+
+.form-control:focus,
+
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow: 0 0 0 .2rem rgba(30,69,136,.20);
+
+}
+
+
+/* ==========================
+   Read Only
+========================== */
+
+.form-control[readonly] {
+
+    background-color: #eef2f7;
+
+    color: #495057;
+
+    cursor: not-allowed;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    min-width: 120px;
+
+    border-radius: 8px;
+
+    font-weight: 500;
+
+}
+
+
+.btn-primary {
+
+    background-color: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+.btn-primary:hover {
+
+    background-color: #17396f;
+
+    border-color: #17396f;
+
+}
+
+
+.btn-secondary {
+
+    background-color: #6c757d;
+
+    border-color: #6c757d;
+
+}
+
+
+.btn-secondary:hover {
+
+    background-color: #5c636a;
+
+    border-color: #565e64;
+
+}
+
+
+.btn-danger {
+
+    background-color: #dc3545;
+
+    border-color: #dc3545;
+
+}
+
+
+.btn-danger:hover {
+
+    background-color: #bb2d3b;
+
+    border-color: #bb2d3b;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+}
+
+
+/* ==========================
+   Divider
+========================== */
+
+hr {
+
+    border-top: 2px solid #dee2e6;
+
+    margin-top: 20px;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* ==========================
+   Animation
+========================== */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 768px) {
+
+    .btn {
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+    }
+
+    .card-body {
+
+        padding: 20px;
+
+    }
+
+}

@@ -3,12 +3,11 @@ package com.bsp.procedure_gateway.exception;
  
 
 public class ValidationException
-        extends ProcedureGatewayException {
+        extends RuntimeException {
 
     public ValidationException(String message) {
-
         super(
-                "REQ_001",
+                
                 message
         );
 

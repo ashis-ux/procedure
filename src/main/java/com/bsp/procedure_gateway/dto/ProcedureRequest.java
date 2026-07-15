@@ -10,6 +10,8 @@ import java.util.Map;
 public class ProcedureRequest {
 
     private String token;
+    
+    private String clientToken;
 
     private Map<String, Object> parameters;
 

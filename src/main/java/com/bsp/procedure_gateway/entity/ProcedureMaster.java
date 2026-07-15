@@ -15,13 +15,18 @@ import com.bsp.procedure_gateway.enums.ProcedureType;
 @Setter
 @Entity
 @Table(
-        name = "PROCEDURE_MASTER",
-        indexes = {
-                @Index(name = "IDX_PROC_UUID", columnList = "PROCEDURE_UUID"),
-                @Index(name = "IDX_PROC_DB", columnList = "DATABASE_ID"),
-                @Index(name = "IDX_PROC_NAME", columnList = "PROCEDURE_NAME")
-        }
-)
+	    name = "PROCEDURE_MASTER",
+	    indexes = {
+	        @Index(name = "IDX_PROC_DB", columnList = "DATABASE_ID"),
+	        @Index(name = "IDX_PROC_NAME", columnList = "PROCEDURE_NAME")
+	    },
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            name = "UK_SCHEMA_PROCEDURE",
+	            columnNames = {"SCHEMA_NAME", "PROCEDURE_NAME"}
+	        )
+	    }
+	)
 public class ProcedureMaster extends AuditEntity {
 
     @Id

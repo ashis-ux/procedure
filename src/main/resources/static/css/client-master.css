@@ -1,0 +1,541 @@
+/* ==========================================================
+   CLIENT MASTER PAGE
+   Project : Procedure Gateway
+   Module  : Client Master
+========================================================== */
+
+/* ==========================
+   Page
+========================== */
+
+body {
+
+    background: #f4f6fa;
+
+    font-family: "Segoe UI",
+                 Tahoma,
+                 Geneva,
+                 Verdana,
+                 sans-serif;
+
+}
+
+
+/* ==========================
+   Card
+========================== */
+
+.database-card {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+
+}
+
+
+/* ==========================
+   Header
+========================== */
+
+.card-header {
+
+    background: #1E4588;
+
+    color: white;
+
+    padding: 18px 24px;
+
+    border-bottom: none;
+
+}
+
+.page-title {
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+}
+
+
+/* ==========================
+   Card Body
+========================== */
+
+.card-body {
+
+    background: white;
+
+    padding: 30px;
+
+}
+
+
+/* ==========================
+   Labels
+========================== */
+
+.form-label {
+
+    font-weight: 600;
+
+    color: #1E4588;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ==========================
+   Form Controls
+========================== */
+
+.form-control,
+.form-select {
+
+    height: 44px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ced4da;
+
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: #1E4588;
+
+    box-shadow: 0 0 0 .20rem rgba(30,69,136,.20);
+
+}
+
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn {
+
+    border-radius: 8px;
+
+    min-width: 130px;
+
+    font-weight: 500;
+
+}
+
+.btn-primary {
+
+    background: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+.btn-primary:hover {
+
+    background: #17386f;
+
+    border-color: #17386f;
+
+}
+
+.btn-warning {
+
+    color: #fff;
+
+}
+
+.btn-success {
+
+    color: white;
+
+}
+
+
+/* ==========================
+   Table
+========================== */
+
+.table {
+
+    margin-bottom: 0;
+
+}
+
+.table thead {
+
+    background: #1E4588;
+
+    color: white;
+
+}
+
+.table thead th {
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    padding: 14px;
+
+    border-color: #1E4588;
+
+}
+
+.table tbody td {
+
+    vertical-align: middle;
+
+    text-align: center;
+
+    padding: 12px;
+
+}
+
+.table-hover tbody tr:hover {
+
+    background: rgba(30,69,136,.05);
+
+}
+
+
+/* ==========================
+   Status Badge
+========================== */
+
+.status-active {
+
+    background: #198754;
+
+    color: white;
+
+    padding: 5px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+.status-inactive {
+
+    background: #dc3545;
+
+    color: white;
+
+    padding: 5px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Action Buttons
+========================== */
+
+.action-btn {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    padding: 0;
+
+    margin: 0 2px;
+
+}
+
+.action-btn i {
+
+    font-size: 15px;
+
+}
+
+
+/* ==========================
+   Pagination
+========================== */
+
+.pagination {
+
+    margin: 0;
+
+}
+
+.page-link {
+
+    color: #1E4588;
+
+}
+
+.page-item.active .page-link {
+
+    background: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+/* ==========================
+   Record Count
+========================== */
+
+#recordCount,
+#procedureRecordCount {
+
+    font-size: 14px;
+
+    color: #6c757d;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================
+   Alerts
+========================== */
+
+.alert {
+
+    border-radius: 8px;
+
+}
+
+
+/* ==========================
+   Footer
+========================== */
+
+.card-footer {
+
+    background: #f8f9fa;
+
+    color: #6c757d;
+
+    padding: 12px;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+                    MODAL
+===================================================== */
+
+.modal-header {
+
+    background: #1E4588;
+
+    color: white;
+
+}
+
+.modal-header .btn-close {
+
+    filter: invert(1);
+
+}
+
+.modal-content {
+
+    border: none;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+}
+
+.modal-body {
+
+    padding: 30px;
+
+}
+
+.modal-footer {
+
+    background: #f8f9fa;
+
+}
+
+
+/* =====================================================
+               READ ONLY FIELDS
+===================================================== */
+
+input[readonly] {
+
+    background: #f8f9fa;
+
+    font-weight: 500;
+
+}
+
+
+/* =====================================================
+             UUID
+===================================================== */
+
+#clientUuid {
+
+    font-family: Consolas,
+                 monospace;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+      REGENERATE BUTTON
+===================================================== */
+
+#btnRegenerateUuid {
+
+    height: 44px;
+
+}
+
+
+/* =====================================================
+       PROCEDURE TABLE
+===================================================== */
+
+#procedureMappingTableBody tr td {
+
+    vertical-align: middle;
+
+}
+
+
+/* =====================================================
+        CHECKBOX
+===================================================== */
+
+.form-check-input {
+
+    width: 18px;
+
+    height: 18px;
+
+    cursor: pointer;
+
+}
+
+.form-check-input:checked {
+
+    background-color: #1E4588;
+
+    border-color: #1E4588;
+
+}
+
+
+/* =====================================================
+          SEARCH ANIMATION
+===================================================== */
+
+.table-responsive {
+
+    animation: fadeIn .35s ease;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+          RESPONSIVE
+===================================================== */
+
+@media (max-width:992px){
+
+    .card-body{
+
+        padding:20px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .btn{
+
+        width:100%;
+
+        margin-top:10px;
+
+    }
+
+    .table{
+
+        font-size:14px;
+
+    }
+
+    .page-title{
+
+        text-align:center;
+
+        margin-bottom:15px;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .table{
+
+        font-size:13px;
+
+    }
+
+    .form-control,
+    .form-select{
+
+        height:42px;
+
+    }
+
+}

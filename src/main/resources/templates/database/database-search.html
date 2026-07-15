@@ -20,7 +20,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" th:href="@{/css/bootstrap-icons.min.css}">
 
- 
+	<link rel="stylesheet" th:href="@{/css/header.css}">
 
     <!-- Search Page CSS -->
     <link rel="stylesheet" th:href="@{/css/database-search.css}">
@@ -29,7 +29,7 @@
 
 <body>
 
- 
+	<div th:replace="~{fragments/header :: header('database')}"></div>
 
 <div class="container-fluid mt-4">
 
@@ -60,7 +60,7 @@
                 <div class="col-md-6 text-end">
 
                     <a th:href="@{/database/create}"
-                       class="btn btn-primary">
+                       class="btn btn-light">
 
                         <i class="bi bi-plus-circle"></i>
 

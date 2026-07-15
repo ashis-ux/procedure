@@ -1,0 +1,61 @@
+/* ==========================================
+   HEADER
+========================================== */
+
+.app-navbar {
+
+    background: #1E4588;
+
+    padding: 10px 20px;
+
+}
+
+.app-navbar .navbar-brand {
+
+    color: #fff;
+
+    font-size: 22px;
+
+    letter-spacing: .5px;
+
+}
+
+.app-navbar .nav-link {
+
+    color: rgba(255,255,255,.85);
+
+    margin-left: 10px;
+
+    padding: 8px 16px;
+
+    border-radius: 6px;
+
+    transition: .3s;
+
+    font-weight: 500;
+
+}
+
+.app-navbar .nav-link:hover {
+
+    background: rgba(255,255,255,.15);
+
+    color: #fff;
+
+}
+
+.app-navbar .nav-link.active {
+
+    background: #ffffff;
+
+    color: #1E4588 !important;
+
+    font-weight: 600;
+
+}
+
+.app-navbar i {
+
+    margin-right: 6px;
+
+}

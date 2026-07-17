@@ -1,0 +1,15 @@
+2026-07-17 06:28:30.537 HikariPool - HikariPool-47 - Thread starvation or clock leap detected (housekeeper delta=12h57m34s514ms147µs400ns).
+2026-07-17 06:28:30.564 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@4c12344b (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.
+2026-07-17 06:28:30.565 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@2d18b964 (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.
+2026-07-17 06:28:30.568 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@484b9a2d (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.
+2026-07-17 06:28:30.570 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@42395d8b (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.
+2026-07-17 06:28:30.572 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@31a3266 (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.
+2026-07-17 06:28:30.573 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@7cfcbc55 (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.
+2026-07-17 06:28:30.575 PoolBase - HikariPool-47 - Failed to validate connection oracle.jdbc.driver.T4CConnection@e98c444 (ORA-17900: Invalid operation, not connected.
+https://docs.oracle.com/error-help/db/ora-17900/). Possibly consider using a shorter maxLifetime value.

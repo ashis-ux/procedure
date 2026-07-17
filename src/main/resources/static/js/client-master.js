@@ -160,7 +160,7 @@ function renderTable(clients) {
 
     });
 
-  
+
 
 }
 
@@ -571,6 +571,10 @@ function buildClientRequest() {
 
         active:
             $("#clientStatus")
+                .val(),
+
+        clientUuid:
+            $("#clientUuid")
                 .val()
 
     };
@@ -918,78 +922,78 @@ $("#btnSaveMapping").on(
     });
 
 
-	function saveProcedureMapping() {
+function saveProcedureMapping() {
 
-	    let procedures = [];
+    let procedures = [];
 
-	    $("#procedureMappingTableBody tr").each(function () {
+    $("#procedureMappingTableBody tr").each(function() {
 
-	        const checkbox = $(this).find(".procedureCheck");
+        const checkbox = $(this).find(".procedureCheck");
 
-	        if (checkbox.length === 0) {
-	            return;
-	        }
+        if (checkbox.length === 0) {
+            return;
+        }
 
-	        procedures.push({
+        procedures.push({
 
-	            procedureId: Number(checkbox.val()),
+            procedureId: Number(checkbox.val()),
 
-	            active: checkbox.is(":checked") ? "Y" : "N"
+            active: checkbox.is(":checked") ? "Y" : "N"
 
-	        });
+        });
 
-	    });
+    });
 
-	    console.log(procedures);
+    console.log(procedures);
 
-	    if (procedures.length === 0) {
+    if (procedures.length === 0) {
 
-	        showProcedureError(
-	            "No procedures available.");
+        showProcedureError(
+            "No procedures available.");
 
-	        return;
-	    }
+        return;
+    }
 
-	    $.ajax({
+    $.ajax({
 
-	        url:
-	            BASE_URL +
-	            "/api/v1/client-procedure-mappings/" +
-	            currentClientId,
+        url:
+            BASE_URL +
+            "/api/v1/client-procedure-mappings/" +
+            currentClientId,
 
-	        method: "POST",
+        method: "POST",
 
-	        contentType: "application/json",
+        contentType: "application/json",
 
-	        data: JSON.stringify({
+        data: JSON.stringify({
 
-	            procedures: procedures
+            procedures: procedures
 
-	        }),
+        }),
 
-	        success: function () {
+        success: function() {
 
-	            showProcedureSuccess(
-	                "Procedure Mapping updated successfully.");
+            showProcedureSuccess(
+                "Procedure Mapping updated successfully.");
 
-	            loadProcedureMappings();
+            loadProcedureMappings();
 
-	            loadClients();
+            loadClients();
 
-	        },
+        },
 
-	        error: function (xhr) {
+        error: function(xhr) {
 
-	            console.log(xhr);
+            console.log(xhr);
 
-	            showProcedureError(
-	                getErrorMessage(xhr));
+            showProcedureError(
+                getErrorMessage(xhr));
 
-	        }
+        }
 
-	    });
+    });
 
-	}
+}
 function showProcedureSuccess(message) {
 
     const popup = $("#procedureSuccessPopup");

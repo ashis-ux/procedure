@@ -1,61 +1,95 @@
-/* ==========================================
-   HEADER
-========================================== */
-
-.app-navbar {
-
-    background: #1E4588;
-
-    padding: 10px 20px;
-
+/* Fixed Header */
+.header-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+    height: 72px;
+    background-color: #244c8f !important;
 }
 
-.app-navbar .navbar-brand {
 
-    color: #fff;
-
-    font-size: 22px;
-
-    letter-spacing: .5px;
-
+/* Add space below fixed header */
+body {
+    padding-top: 72px;
 }
 
-.app-navbar .nav-link {
 
-    color: rgba(255,255,255,.85);
-
-    margin-left: 10px;
-
-    padding: 8px 16px;
-
-    border-radius: 6px;
-
-    transition: .3s;
-
-    font-weight: 500;
-
+/* Logo */
+.logo {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    background-color: white;
+    border-radius: 50%;
+    padding: 3px;
 }
 
-.app-navbar .nav-link:hover {
 
-    background: rgba(255,255,255,.15);
-
-    color: #fff;
-
+/* Brand */
+.navbar-brand {
+    color: white !important;
 }
 
-.app-navbar .nav-link.active {
 
-    background: #ffffff;
+/* Left Menu Buttons */
+.header-navbar .btn-outline-light {
+    border: 1px solid rgba(255,255,255,.8);
+    font-weight: 600;
+    padding: 8px 14px;
+}
 
-    color: #1E4588 !important;
 
+/* Hover */
+.header-navbar .btn-outline-light:hover {
+    background-color: white;
+    color: #244c8f;
+}
+
+
+/* Logout Button */
+.header-navbar .btn-danger {
+    background-color: #ef3340;
+    border-color: #ef3340;
+    font-weight: 600;
+    padding: 8px 18px;
+}
+
+
+/* Card Header */
+.form-header {
+    background-color: #1E4588 !important;
+    color: white;
+}
+
+
+/* Status Alignment */
+.status-active,
+.status-inactive {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 60px;
+    height: 25px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
     font-weight: 600;
 
 }
 
-.app-navbar i {
 
-    margin-right: 6px;
+.status-active {
+    background-color: #198754;
+    color:white;
+}
 
+
+.status-inactive {
+    background-color: #dc3545;
+    color:white;
 }

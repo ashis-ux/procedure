@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +22,13 @@ public abstract class AuditEntity {
 
 	@CreationTimestamp
 	@Column(name = "CREATED_DATE", nullable = false, updatable = false)
-	private LocalDateTime createdDate;
+	private Date createdDate;
 
 	@Column(name = "UPDATED_BY")
 	private String updatedBy;
 
 	@UpdateTimestamp
 	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
+	private Date updatedDate;
 
 }

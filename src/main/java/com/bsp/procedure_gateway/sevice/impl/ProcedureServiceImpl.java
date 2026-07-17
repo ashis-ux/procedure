@@ -21,6 +21,7 @@ import com.bsp.procedure_gateway.entity.DatabaseMaster;
 import com.bsp.procedure_gateway.entity.ProcedureMaster;
 import com.bsp.procedure_gateway.enums.ActiveStatus;
 import com.bsp.procedure_gateway.enums.ExecutionStatus;
+import com.bsp.procedure_gateway.exception.BadRequestException;
 import com.bsp.procedure_gateway.exception.ResourceNotFoundException;
 import com.bsp.procedure_gateway.executor.ProcedureExecutor;
 import com.bsp.procedure_gateway.repo.ClientProcedureMappingRepository;
@@ -63,6 +64,8 @@ public class ProcedureServiceImpl implements ProcedureService {
     public ProcedureResponse execute(
             String procdurename,
             ProcedureRequest request,HttpServletRequest httpRequest) {
+    	
+    	if(request.getToken()==null||request.getClientToken()==null)throw new BadRequestException("you are not authorized");
 
         LOGGER.info("Starting Procedure Execution");
         long start = System.currentTimeMillis();

@@ -3,6 +3,7 @@ package com.bsp.procedure_gateway.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import com.bsp.procedure_gateway.dto.DatabaseDropdownResponse;
 @RequestMapping("/api/database")
 @RequiredArgsConstructor
 @Slf4j
+@PreAuthorize("hasAuthority('APP_PROCEDUREAPIGATEWAY')")
 public class DatabaseController {
 
     private final DatabaseService databaseService;

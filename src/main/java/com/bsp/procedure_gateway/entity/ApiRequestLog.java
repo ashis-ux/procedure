@@ -1,6 +1,7 @@
 package com.bsp.procedure_gateway.entity;
  
 import com.bsp.procedure_gateway.enums.ExecutionStatus;
+import com.bsp.procedure_gateway.sevice.impl.AuditListener;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditListener.class)
 @Table(name = "API_REQUEST_LOG", indexes = { @Index(name = "IDX_REQUEST_ID", columnList = "REQUEST_ID"),
 		@Index(name = "IDX_UUID", columnList = "PROCEDURE_UUID"), @Index(name = "IDX_STATUS", columnList = "STATUS") })
 public class ApiRequestLog extends AuditEntity {

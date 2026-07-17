@@ -308,15 +308,15 @@ function populateTable(pageData) {
 
                 </td>
 
-                <td>
+				<td class="text-center align-middle">
 
-                    ${procedure.active === "Y"
+				    ${procedure.active === "Y"
 
-                        ? '<span class="status-active">Active</span>'
+				        ? '<span class="badge rounded-pill bg-success status-badge">Active</span>'
 
-                        : '<span class="status-inactive">Non Active</span>'}
+				        : '<span class="badge rounded-pill bg-danger status-badge">Non Active</span>'}
 
-                </td>
+				</td>
 
 				<td>
 

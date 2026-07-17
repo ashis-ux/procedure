@@ -4,6 +4,8 @@ package com.bsp.procedure_gateway.entity;
 import com.bsp.procedure_gateway.enums.ActiveStatus;
 import com.bsp.procedure_gateway.enums.DataType;
 import com.bsp.procedure_gateway.enums.ParameterMode;
+import com.bsp.procedure_gateway.sevice.impl.AuditListener;
+
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -12,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditListener.class)
 @Table(
         name = "PROCEDURE_PARAMETER",
         indexes = {

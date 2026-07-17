@@ -22,6 +22,10 @@ public class ClientRequest {
             message = "Client description cannot contain spaces."
     )
     private String clientDescription;
+    
+    @NotBlank(message = "Client Uuid is required.")
+    private String clientUuid;
+
 
     private ActiveStatus active;
 }

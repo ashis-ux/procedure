@@ -217,12 +217,6 @@ public class ProcedureParameterServiceImpl
                 procedureParameterRepository.findMaxParameterId() + 1
 
         );
-        
-        parameter.setCreatedBy("SYSTEM");
-        parameter.setCreatedDate(LocalDateTime.now());
-
-        parameter.setUpdatedBy("SYSTEM");
-        parameter.setUpdatedDate(LocalDateTime.now());
 
         ProcedureParameter savedParameter =
                 procedureParameterRepository.save(parameter);

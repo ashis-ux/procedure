@@ -188,10 +188,6 @@ public class ClientProcedureMappingServiceImpl
 
                 mapping.setActive(status);
 
-                mapping.setUpdatedBy("SYSTEM");
-
-                mapping.setUpdatedDate(LocalDateTime.now());
-
                 log.info(
                         "Updated Mapping : Client {}, Procedure {}, Status {}",
                         clientId,
@@ -227,14 +223,6 @@ public class ClientProcedureMappingServiceImpl
             newMapping.setProcedureMaster(procedure);
 
             newMapping.setActive(ActiveStatus.Y);
-
-            newMapping.setCreatedBy("SYSTEM");
-
-            newMapping.setCreatedDate(LocalDateTime.now());
-
-            newMapping.setUpdatedBy("SYSTEM");
-
-            newMapping.setUpdatedDate(LocalDateTime.now());
 
             existingMappings.add(newMapping);
 

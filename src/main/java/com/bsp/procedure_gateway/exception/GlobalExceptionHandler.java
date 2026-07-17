@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
         ErrorResponse response = ErrorResponse.builder()
                 .requestId(UUID.randomUUID().toString())
-//                .errorCode(exception.getErrorCode())
+                .errorCode(exception.getErrorCode())
                 .errorMessage(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
@@ -35,21 +35,21 @@ public class GlobalExceptionHandler {
                 .body(response);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(
-            Exception exception) {
-
-        ErrorResponse response = ErrorResponse.builder()
-                .requestId(UUID.randomUUID().toString())
-                .errorCode("SYS_500")
-                .errorMessage("Internal server error")
-                .timestamp(LocalDateTime.now())
-                .build();
-
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(response);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorResponse> handleException(
+//            Exception exception) {
+//
+//        ErrorResponse response = ErrorResponse.builder()
+//                .requestId(UUID.randomUUID().toString())
+//                .errorCode("SYS_500")
+//                .errorMessage("Internal server error")
+//                .timestamp(LocalDateTime.now())
+//                .build();
+//
+//        return ResponseEntity
+//                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body(response);
+//    }
     
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(

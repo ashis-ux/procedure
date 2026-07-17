@@ -10,10 +10,12 @@ import java.util.List;
 
 import com.bsp.procedure_gateway.enums.ActiveStatus;
 import com.bsp.procedure_gateway.enums.ProcedureType;
+import com.bsp.procedure_gateway.sevice.impl.AuditListener;
 
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditListener.class)
 @Table(
 	    name = "PROCEDURE_MASTER",
 	    indexes = {

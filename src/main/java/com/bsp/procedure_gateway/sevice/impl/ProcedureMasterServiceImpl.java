@@ -149,12 +149,6 @@ public class ProcedureMasterServiceImpl implements ProcedureMasterService{
 	    
 
 	    procedure.setProcedureId(nextId);
-	    
-	    procedure.setCreatedBy("SYSTEM");  // add this
-	    procedure.setCreatedDate(LocalDateTime.now());
-
-	    procedure.setUpdatedBy("SYSTEM");  // add this
-	    procedure.setUpdatedDate(LocalDateTime.now());
 
 
 	    ProcedureMaster savedProcedure =

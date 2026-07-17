@@ -1,6 +1,7 @@
 package com.bsp.procedure_gateway.dto;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.bsp.procedure_gateway.enums.ActiveStatus;
 
@@ -22,11 +23,5 @@ public class ClientResponse {
 
     private ActiveStatus active;
 
-    private String createdBy;
-
-    private LocalDateTime createdDate;
-
-    private String updatedBy;
-
-    private LocalDateTime updatedDate;
+    
 }

@@ -3,6 +3,7 @@ package com.bsp.procedure_gateway.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.bsp.procedure_gateway.dto.ProcedureMasterRequest;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/procedure")
+@PreAuthorize("hasAuthority('APP_PROCEDUREAPIGATEWAY')")
 public class ProcedureMasterController {
 
     private final ProcedureMasterService procedureService;

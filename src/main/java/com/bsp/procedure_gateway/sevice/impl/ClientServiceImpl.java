@@ -93,11 +93,7 @@ public class ClientServiceImpl implements ClientService {
         client.setActive(
                 request.getActive());
 
-        client.setCreatedBy("SYSTEM");
-        client.setCreatedDate(LocalDateTime.now());
-
-        client.setUpdatedBy("SYSTEM");
-        client.setUpdatedDate(LocalDateTime.now());
+         
 
         /*
          * Save
@@ -155,14 +151,6 @@ public class ClientServiceImpl implements ClientService {
                 .clientDescription(entity.getClientDescription())
 
                 .active(entity.getActive())
-
-                .createdBy(entity.getCreatedBy())
-
-                .createdDate(entity.getCreatedDate())
-
-                .updatedBy(entity.getUpdatedBy())
-
-                .updatedDate(entity.getUpdatedDate())
 
                 .build();
     }
@@ -231,10 +219,7 @@ public class ClientServiceImpl implements ClientService {
         client.setActive(
                 request.getActive());
 
-        client.setUpdatedBy("SYSTEM");
-
-        client.setUpdatedDate(
-                LocalDateTime.now());
+         client.setClientUuid(request.getClientUuid());
 
         /*
          * Save
@@ -334,7 +319,7 @@ public class ClientServiceImpl implements ClientService {
     }
     
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public ClientResponse regenerateClientUuid(
             Integer clientId) {
 
@@ -359,13 +344,9 @@ public class ClientServiceImpl implements ClientService {
         client.setClientUuid(
                 UUID.randomUUID().toString());
 
-        client.setUpdatedBy("SYSTEM");
 
-        client.setUpdatedDate(
-                LocalDateTime.now());
-
-        Client updatedClient =
-                clientRepository.save(client);
+        Client updatedClient =client;
+                
 
         log.info(
                 "Client UUID regenerated successfully. Client Id : {}",
